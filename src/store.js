@@ -14,6 +14,14 @@ import {
     cartReducer,
 } from './reducers/cartReducers'
 
+import {
+    orderReducer,
+} from './reducers/orderReducers'
+
+import {
+    subsReducer,
+} from './reducers/subsReducers'
+
 
 const reducer = combineReducers({
     userLogin: userLoginReducer,
@@ -23,6 +31,9 @@ const reducer = combineReducers({
     product: productDetailReducer,
 
     cart: cartReducer,
+    order: orderReducer,
+
+    subscription: subsReducer,
 })
 
 const userInfoFromStorage = localStorage.getItem('userInfo') ?

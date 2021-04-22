@@ -54,15 +54,8 @@ export const addToCart = (sku) => async (dispatch, getState) => {
         sku: sku, username: userInfo.id,
     }
 
-    // const config = {
-    //     headers: {
-    //         'Content-type': 'application/json',
-    //         // Authorization: `Bearer ${userInfo.access}`
-    //     }
-    // }
-
     const { data } = await api.post(
-        'cart/add/',
+        'cart/cart-item/add/',
         body,
         )
 
@@ -87,4 +80,65 @@ export const removeFromCart = (id) => async (dispatch, getState) => {
 
     localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems))
 }
+
+
+export const createOrder = () => async (dispatch, getState) => {
+    const {
+        order: { orderItems },
+    } = getState()
+
+
+    const { data } = await api.post(
+            `order/new-order/`,
+            {subscription_id: 1}) // we should have subscription_id OR we can identify the user with the token
+
+
+    // Add all current items to the new order 
+    for (let i = 0; i < orderItems.length; i++) {
+        const item = orderItems[i]
+
+        let body = {
+            order_id: data.order_id,
+            sku: item.sku.sku,
+            status: 'new',
+        }
+
+        await api.post(
+            `order/order-item/add/`,
+            body)
+    } 
+
+    // Add new items to the order
+    const {
+        cart: { cartItems },
+    } = getState()
+
+    const cartItemsNew = cartItems.filter(item => item.status === 'new')
+    const cartItemsReturn = cartItems.filter(item => item.status === 'return')
+
+    for (let i = 0; i < cartItemsNew.length; i++) {
+        const item = cartItemsNew[i]
+
+        let body = {
+            order_id: data.order_id,
+            sku: item.sku.sku,
+            status: 'new',
+        } 
+
+        
+        await api.post(
+            `order/order-item/add/`,
+            body)
+
+        await api.delete(
+            `cart/cart-item/remove/${item.cart_item_id}`,
+            body)
+    }
+
+
+
+    // localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems))
+}
+
+
 

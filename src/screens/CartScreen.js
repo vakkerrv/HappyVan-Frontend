@@ -1,89 +1,106 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import { Nav, Container, Row, Col, Image, ListGroup, Form, Button } from 'react-bootstrap';
-import { LinkContainer } from 'react-router-bootstrap';
+import { Container, ListGroup, Button, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom'
 
-// import Product from '../components/Product'
-import { fetchCartList, removeFromCart } from '../actions/cartActions'
+import CartItem from '../components/CartItem'
+import OrderItem from '../components/OrderItem'
+import { fetchCartList, createOrder } from '../actions/cartActions'
+import { fetchOrderList } from '../actions/orderActions'
 
 const CartScreen = () => {
+    const [totalPrice, setTotalPrice] = useState(0)
+
     const dispatch = useDispatch()
-    const cartCart = useSelector(state => state.cart)
-    const { error, loading, cartItems } = cartCart
+
+    const order = useSelector(state => state.order)
+    const { orderError, orderLoading, orderItems } = order
+
+    const cart = useSelector(state => state.cart)
+    const { cartError, cartLoading, cartItems } = cart
+
+    const cartItemsNew = cartItems.filter(item => item.status === 'new')
+    const cartItemsReturn = cartItems.filter(item => item.status === 'return')
 
     useEffect(() => {
         dispatch(fetchCartList())
-    }, [dispatch])
+        dispatch(fetchOrderList())
+    }, [dispatch, fetchCartList])
 
-    const removeFromCartHandler = (id) => {
-        dispatch(removeFromCart(id))
+    const createOrderHandler = () => {
+        dispatch(createOrder())
     }
 
     return (
         <Container>
-        	<h1>Cart</h1>
+        	<h1>Корзина</h1>
                     {cartItems.length === 0 ? (
                     <Container>
                         Your cart is empty <Link to='/'>Go Back</Link>
                     </Container>
-                    ) : (                    
-                        <ListGroup variant='flush'>
-                            {cartItems.map(item => (
-                            <ListGroup.Item key={item.sku.cart_item_id}>
-                                <Row>
-                                    <Col md={3}>
-                                        {item.sku.image ? (
-                                            <Image src={item.sku.image[0].image} alt={'image'} fluid rounded />
-                                            ) : (
-                                            <Image alt={'image'} fluid rounded />
-                                            )
+                    ) : (
+
+                        <Container id='cart-container'>
+                            <Row>
+                                <Col md={6}  id='onhand-items'>
+                                    <h2 className='window-name'>Оставить у себя</h2>
+
+                                    <ListGroup variant='flush'>
+                                        {orderItems.map(item => (
+                                            <OrderItem item = {item.sku} />
+                                            ))
                                         }
-                                    </Col>
+                                    </ListGroup>
+                                    
+                                </Col>
 
-                                    <Col md={9}>
-                                        <h4>
-                                            {item.sku.name}
-                                        </h4>
-
-                                        <div className='my-4'>
-                                            {item.sku.price}
-                                        </div>
-
-                                        {/*<Form.Control
-                                            as="select"
-                                            value={1} 
-                                            size="sm"
-                                            className='my-2'                        
-                                        >
-                                            {
-
-                                                [...Array(5).keys()].map((x) => (
-                                                    <option key={x + 1} value={x + 1}>
-                                                        {x + 1}
-                                                    </option>
+                                <Col>
+                                    <Row id='new-items'>
+                                        <h2 className='window-name'>Добавить</h2>
+                                        
+                                        <ListGroup variant='flush'>
+                                            {cartItemsNew.map(item => (
+                                                <CartItem item = {item.sku} />
                                                 ))
                                             }
-                                        </Form.Control>*/}
+                                        </ListGroup>
+                                    </Row>
+                                    <Row id='return-items'>
+                                        <h2 className='window-name'>Вернуть</h2>
+                                        
+                                        <ListGroup variant='flush'>
+                                            {cartItemsReturn.map(item => (
+                                                <CartItem item = {item.sku} />
+                                                ))
+                                            }
+                                        </ListGroup>
+                                    </Row>
+                                </Col>
+                            </Row>
+                        </Container>
 
-                                        <Button
-                                            type='button'
-                                            variant='light'
-                                            className='my-2'
-                                            onClick = {() => removeFromCartHandler(item.cart_item_id)}
-                                        >
-                                            <i className='fas fa-trash'></i>
-                                        </Button>
-                                    </Col>
-                                </Row>
-                            </ListGroup.Item>
-                            ))}
-                        </ListGroup>    
                         )
                     }
+        
+        <Container className='cart-footer'>
+                <div className='d-flex flex-row-reverse'>
+                    <Button 
+                        className='mx-3'
+                        onClick = {() => createOrderHandler()}
+                    >
+                        Продолжить
+                    </Button>
 
+                    <div className="text-end mx-2">
+                        <h2>Итого</h2>
+                        {cartItems.reduce((acc, item) => acc + parseFloat(item.sku.price), 0).toFixed(0)} токенов
+                    </div>
+                    
+                </div>
+        </Container>
 
         </Container>
+
     );
 };
 

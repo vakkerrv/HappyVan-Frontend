@@ -1,0 +1,4 @@
+export const SUBSCRIBE = 'SUBSCRIBE'
+// export const SUBSCRIBE_SUCCESS = 'SUBSCRIBE_SUCCESS'
+// export const SUBSCRIBE_FAIL = 'SUBSCRIBE_FAIL'
+

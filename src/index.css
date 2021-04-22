@@ -55,6 +55,7 @@ h1{
 /*Footer*/
 footer{
 	font-size: 0.9em;
+	min-height: 300px;
 }
 
 footer h2{
@@ -66,7 +67,7 @@ footer .list-group-flush>.list-group-item{
 }
 
 footer #brand-icon{
-	width: 200px;
+	width: 300px;
 	height: auto;
 }
 /*Footer end*/
@@ -151,7 +152,7 @@ input[type="text"], input[type="password"], input[type="email"]{
 }
 
 
-.form-label{
+.my-form-floating .form-label{
   opacity: 0.7;
   transition: opacity .2s ease-in,transform .2s ease-in!important;
 }
@@ -195,3 +196,52 @@ a, a:hover{
 	color: black;
 	text-decoration: initial; 
 }
+
+
+/* Cart screen */
+#onhand-items{
+	height: 80vh;
+	overflow: scroll;
+}
+
+#new-items, #return-items{
+	height: 40vh;
+	overflow: scroll;
+}
+
+.window-name{
+	font-size: 1.4rem;
+	color: var(--blue);
+	margin-bottom: 1em;
+}
+
+.cart-name{
+	font-size: 1rem;
+}
+
+
+.cart-footer{
+	min-height: 5rem;
+	position: fixed;
+	bottom: 0;
+	background-color: white;
+	opacity: 60%;
+	z-index: 1;
+	/*position:absolute;*/
+}
+
+.cart-footer:hover{
+	opacity: 100%;
+}
+
+.cart-footer h2{
+	font-size: 1.3rem;
+}
+
+.cart-footer button{
+	background-color: var(--blue);
+}
+/* Cart screen ends */
+
+
+
