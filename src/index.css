@@ -25,11 +25,18 @@ h1{
 	margin-bottom: 2rem;
 }
 
+.col-no-padding{
+	padding: 0;
+}
+
+
+
+/*Header*/
 .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .nav-link{
 	color: rgba(0,0,0,.9);
 }
 
-/*Header*/
+
 #brand-icon{
 	width: 125px;
 	height: auto;
@@ -168,8 +175,11 @@ input[type="text"], input[type="password"], input[type="email"]{
 /*Register Screen*/
 
 
-
-
+/* Profile Screen */
+.tab-content{
+	padding-top: 1rem;
+}
+/* Profile Screen ends */
 
 /* Product screen */
 .card-img-top {
@@ -199,7 +209,7 @@ a, a:hover{
 
 
 /* Cart screen */
-#onhand-items{
+/*#onhand-items{
 	height: 80vh;
 	overflow: scroll;
 }
@@ -207,7 +217,7 @@ a, a:hover{
 #new-items, #return-items{
 	height: 40vh;
 	overflow: scroll;
-}
+}*/
 
 .window-name{
 	font-size: 1.4rem;
@@ -227,7 +237,6 @@ a, a:hover{
 	background-color: white;
 	opacity: 60%;
 	z-index: 1;
-	/*position:absolute;*/
 }
 
 .cart-footer:hover{
@@ -241,6 +250,14 @@ a, a:hover{
 .cart-footer button{
 	background-color: var(--blue);
 }
+
+
+.bag-item-return{
+	/*background-color: gray;*/
+	opacity: 60%;
+}
+
+
 /* Cart screen ends */
 
 

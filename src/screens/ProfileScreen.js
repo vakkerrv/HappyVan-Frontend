@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { Container, Form, Button, Row, Col } from 'react-bootstrap'
+import { Container, Form, Button, Row, Col, Tabs, Tab } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
+import { ProfileTab, SubscriptionTab } from '../components/ProfileSettings'
 
-import { logout } from '../actions/userActions'
 import { subscribe } from '../actions/subsActions'
 
 const ProfileScreen = ({ history }) => {
@@ -31,14 +31,11 @@ const ProfileScreen = ({ history }) => {
         }
     }
 
-        const logoutHandler = () => {
-        dispatch(logout())
-    }
 
     return (
         <Container>
             
-            <Form.Group controlId='subscription_type'>
+{/*            <Form.Group controlId='subscription_type'>
                 <Form.Label>Выберите тип подписки</Form.Label>
                 <Form.Control 
                     as="select"
@@ -54,13 +51,25 @@ const ProfileScreen = ({ history }) => {
 
             <Button type='submit' onClick={SubscribeHandler}>    
                 Подписаться
-            </Button>
+            </Button>*/}
 
-            <div className='my-4'>
-                <Button onClick={logoutHandler}>    
-                    Logout
-                </Button>
-            </div>
+
+            <Row>
+                <Col md={8}>
+                    <Tabs defaultActiveKey="profile" id="account-settings">
+                        <Tab eventKey="profile" title="Аккаунт">
+                            <ProfileTab/>
+                        </Tab>
+                        <Tab eventKey="subscription" title="Подписка">
+                            <SubscriptionTab/>
+                        </Tab>
+                        <Tab eventKey="notifications" title="Уведомления">
+
+                        </Tab>
+                    </Tabs>
+                </Col>
+            </Row>
+
         </Container>
   	  
     );

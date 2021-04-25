@@ -22,6 +22,10 @@ import {
     subsReducer,
 } from './reducers/subsReducers'
 
+import {
+    bagReducer,
+} from './reducers/bagReducers'
+
 
 const reducer = combineReducers({
     userLogin: userLoginReducer,
@@ -30,6 +34,7 @@ const reducer = combineReducers({
     productList: productListReducer,
     product: productDetailReducer,
 
+    bag: bagReducer,
     cart: cartReducer,
     order: orderReducer,
 

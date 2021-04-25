@@ -1,0 +1,10 @@
+export const BAG_LIST_REQUEST = 'BAG_LIST_REQUEST'
+export const BAG_LIST_SUCCESS = 'BAG_LIST_SUCCESS'
+export const BAG_LIST_FAIL = 'BAG_LIST_FAIL'
+export const BAG_ITEM_RETURN = 'BAG_ITEM_RETURN'
+
+
+
+export const BAG_STATUS_TO_RETURN = 'TO_RETURN'
+export const BAG_STATUS_ACTIVE = 'ACTIVE'
+

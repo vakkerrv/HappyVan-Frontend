@@ -18,7 +18,11 @@ export const orderReducer = (state = { orderItems: []}, action) => {
 			}
 
 		case ORDER_LIST_FAIL:
-			return { loading: false, orderItems: [], error: action.payload }
+			return { 
+				loading: false, 
+				orderItems: [], 
+				error: action.payload 
+			}
 
 
 		// case CART_ADD_ITEM:

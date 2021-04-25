@@ -1,21 +1,20 @@
 import React, { Component } from 'react';
-import { Navbar, Nav, Container, Row, Image } from 'react-bootstrap';
+import { Navbar, Nav, Container, Row, Image, NavDropdown } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { logout } from '../actions/userActions'
+
 const Header = () => {
+    const dispatch = useDispatch()
 
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
 
-    const navUserState = {}
-	if (userInfo){ 
-		navUserState['fieldName'] = 'My account'
-		navUserState['link'] = '/profile'
-	}else{
-		navUserState['fieldName'] = 'Login'
-		navUserState['link'] = '/login'
-	}
+    const logoutHandler = () => {
+        dispatch(logout())
+    }
+
 
     return (
         <header>
@@ -40,16 +39,7 @@ const Header = () => {
 				    </Nav>
 
 				    <Nav className="navbar-base ml-auto">
-
-  				      <LinkContainer to={navUserState['link']}>
-				      	<Nav.Link>
-				      		<Container className='navbar-icon'>
-					      		<i className="fas fa-user-alt"></i>
-						      	<p>{navUserState['fieldName']}</p>
-					      	</Container>
-			      		</Nav.Link>
-				      </LinkContainer>
-				      
+		      
   				      <LinkContainer to='/'>
 				      	<Nav.Link>
 				      		<Container className='navbar-icon'>
@@ -70,6 +60,27 @@ const Header = () => {
 					      </LinkContainer>
 					      ) : (void 0)
 				  	  }
+			      
+
+				      {userInfo ? (
+                    		<Container className='navbar-icon'>
+                            	<i className="fas fa-user-alt"></i>
+	                            <NavDropdown title='Аккаунт' id='username'>
+	                                <LinkContainer to='/profile'>
+		                                    <NavDropdown.Item>Управление аккаунтом</NavDropdown.Item>
+	                                </LinkContainer>
+                                	<NavDropdown.Item onClick={logoutHandler}>Выйти</NavDropdown.Item>
+                            	</NavDropdown>
+                            </Container>
+
+                            ) : (
+                            <LinkContainer to='/login'>
+                                <Nav.Link><i className="fas fa-user"></i>Войти</Nav.Link>
+                            </LinkContainer>
+                        )}
+
+
+
 				    </Nav>
 
 				  </Navbar.Collapse>
