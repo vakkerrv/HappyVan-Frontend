@@ -44,20 +44,18 @@ const CartScreen = ({ history }) => {
         	<h1>Корзина</h1>
                 <Row>
                     <Col md={6} id='new-items'>
+                    <h2 className='window-name'>Добавить</h2>
 
                     {cartItems.length === 0 ? (
-                        <Container>
-                            Your cart is empty
-                        </Container>
+                        <Container></Container>
                         ) : (
 
                             <Container id='cart-container'>
-                                    <h2 className='window-name'>Добавить</h2>
                                     
                                     <ListGroup variant='flush'>
                                         {cartItems.map(item => (
-                                            <ListGroup.Item key={item.cart_item_id}>
-                                                <CartItem item = {item.sku} id = {item.cart_item_id}/>
+                                            <ListGroup.Item key={item.id}>
+                                                <CartItem item = {item.item_id} id = {item.id}/>
                                             </ListGroup.Item>
                                             ))
                                         }
@@ -82,21 +80,19 @@ const CartScreen = ({ history }) => {
                     <h2 className='window-name'>Текущий набор</h2>
 
                     {bagItems.length === 0 ? (
-                        <Container>
-                            
-                        </Container>
+                        <Container></Container>
                         ) : (
                             <Container id='cart-container'>
                                         <ListGroup variant='flush'>
                                             {bagItems.map(item => (
                                                 <ListGroup.Item 
-                                                    key={item.bag_item_id} 
+                                                    key={item.id} 
                                                     className={item.status===BAG_STATUS_TO_RETURN ? 'bag-item-return' : 'bag-item-active'}
                                                     // className={'bag-item-return'}
                                                 >
                                                     <BagItem 
-                                                        item = {item.sku} 
-                                                        id = {item.bag_item_id}
+                                                        item = {item.item_id} 
+                                                        id = {item.id}
                                                         status = {item.status}/>
                                                 </ListGroup.Item>
                                                 ))
@@ -123,7 +119,9 @@ const CartScreen = ({ history }) => {
                 <div className="text-end mx-2">
                     <h2>Итого</h2>
                     {cartItems.length !== 0 ? (
-                        cartItems.reduce((acc, item) => acc + parseFloat(item.sku.price), 0).toFixed(0)
+                        cartItems.reduce(function(acc, item){
+                            return acc + (item.item_id ? parseFloat(item.item_id.price) : 0)
+                        }, 0).toFixed(0)
                     ) : (
                         0
                         )

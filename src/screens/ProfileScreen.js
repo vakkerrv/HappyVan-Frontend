@@ -52,23 +52,27 @@ const ProfileScreen = ({ history }) => {
             <Button type='submit' onClick={SubscribeHandler}>    
                 Подписаться
             </Button>*/}
+            {userInfo ? (
+                    <Row>
+                        <Col md={8}>
+                            <Tabs defaultActiveKey="profile" id="account-settings">
+                                <Tab eventKey="profile" title="Аккаунт">
+                                    <ProfileTab/>
+                                </Tab>
+                                <Tab eventKey="subscription" title="Подписка">
+                                    <SubscriptionTab/>
+                                </Tab>
+                                <Tab eventKey="notifications" title="Уведомления">
 
+                                </Tab>
+                            </Tabs>
+                        </Col>
+                    </Row>
+                ) : (
+                    <h1> Необходимо войти в аккаунт </h1>
+                )}
 
-            <Row>
-                <Col md={8}>
-                    <Tabs defaultActiveKey="profile" id="account-settings">
-                        <Tab eventKey="profile" title="Аккаунт">
-                            <ProfileTab/>
-                        </Tab>
-                        <Tab eventKey="subscription" title="Подписка">
-                            <SubscriptionTab/>
-                        </Tab>
-                        <Tab eventKey="notifications" title="Уведомления">
-
-                        </Tab>
-                    </Tabs>
-                </Col>
-            </Row>
+            
 
         </Container>
   	  

@@ -49,10 +49,32 @@ h1{
 .navbar .navbar-icon{
 	display: block;
 	text-align: center;
+	padding: .5rem;
 }
 
 .navbar-icon p{
 	margin: 0;
+}
+
+
+#account-dropdown::after{
+    content: none;
+}
+
+#account-dropdown{
+    padding: 0!important;
+    background-color: white;
+    border: none;
+    color:inherit;
+}
+
+.form-control:focus {
+  box-shadow: none;
+  border-color: var(--blue);
+}
+
+#account-dropdown:focus {
+  box-shadow: none;
 }
 
 /*Header end*/
@@ -112,9 +134,13 @@ footer #brand-icon{
 }
 
 .landing-section .landing-button{
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	margin-left: 1rem;
 	margin-right: 1rem;
 	width: 10rem;
+	height: 4rem;
 	background-color: #C81B2F;
 	padding: 0.9rem;
 }
@@ -131,8 +157,7 @@ footer #brand-icon{
 
 
 /*Login Screen*/
-button{
-}
+
 /*Login Screen*/
 
 

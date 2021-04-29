@@ -17,17 +17,23 @@ const CatalogScreen = () => {
 
     return (
         <Container>
-        	<h1>Catalog</h1>
-                
+        	<h1>Каталог</h1>
+
                 <Row>
-                	{products.map(product => (
-                	<Col 
-                		className='d-flex justify-content-center'
-                		key={product.sku} 
-                		sm={12} md={6} lg={4} xl={3}>
-	                        <Product product={product} />
-                    </Col>
-                    ))}
+                	{ products ? (
+                        products.map(product => (
+                            <Col 
+                            className='d-flex justify-content-center'
+                            key={product.id} 
+                            sm={12} md={6} lg={4} xl={3}>
+                                <Product product={product} />
+                            </Col>
+                            ))
+                        ) : (
+                            <div>На текущий момент в каталоге нет товаров</div>
+                        )
+
+                    }
                 </Row>
 
         </Container>

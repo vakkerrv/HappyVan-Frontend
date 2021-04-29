@@ -32,14 +32,10 @@ export const fetchCartList = () => async (dispatch, getState) => {
 }
 
 
-export const addToCart = (sku) => async (dispatch, getState) => {
-    const {
-        userLogin: { userInfo },
-    } = getState()
+export const addToCart = (item_id) => async () => {
 
     const body = {
-        sku: sku, 
-        user_id: userInfo.id,
+        item_id: item_id, 
         status: 'new'
     }
 
@@ -48,11 +44,11 @@ export const addToCart = (sku) => async (dispatch, getState) => {
         body,
         )
 
-    dispatch({ 
-        type: CART_ADD_ITEM, 
-        payload: data })
+    // dispatch({ 
+    //     type: CART_ADD_ITEM, 
+    //     payload: data })
 
-    localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems))
+    // localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems))
 }
 
 
@@ -62,8 +58,8 @@ export const removeFromCart = (id) => async (dispatch, getState) => {
         `cart/cart-item/remove/${id}`)
 
     dispatch({
-    type: CART_REMOVE_ITEM,
-    payload: id,
+        type: CART_REMOVE_ITEM,
+        payload: id,
     })
 
     localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems))

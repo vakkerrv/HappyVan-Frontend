@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Navbar, Nav, Container, Row, Image, NavDropdown } from 'react-bootstrap';
+import { Navbar, Nav, Container, Row, Image, NavDropdown, Dropdown } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
+import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { logout } from '../actions/userActions'
@@ -14,7 +15,6 @@ const Header = () => {
     const logoutHandler = () => {
         dispatch(logout())
     }
-
 
     return (
         <header>
@@ -31,10 +31,10 @@ const Header = () => {
 				  <Navbar.Collapse id="basic-navbar-nav">
 				    <Nav className="navbar-base mr-auto">
 				      <LinkContainer to='/catalog'>
-				      	<Nav.Link>Our Toys</Nav.Link>
+				      	<Nav.Link>Каталог</Nav.Link>
 				      </LinkContainer>
 				      <LinkContainer to='/about'>
-				      	<Nav.Link>About Us</Nav.Link>
+				      	<Nav.Link>О нас</Nav.Link>
 				      </LinkContainer>
 				    </Nav>
 
@@ -44,7 +44,7 @@ const Header = () => {
 				      	<Nav.Link>
 				      		<Container className='navbar-icon'>
 						      	<i className="fas fa-heart"></i>
-				      			<p>My Wishlist</p>
+				      			<p>Избранное</p>
 					      	</Container>
 				      	</Nav.Link>
 				      </LinkContainer>
@@ -54,7 +54,7 @@ const Header = () => {
 					      	<Nav.Link>
 					      		<Container className='navbar-icon'>
 							      	<i className="fas fa-shopping-cart"></i>
-							     	<p>My Cart</p>
+							     	<p>Коризна</p>
 						      	</Container>
 					      	</Nav.Link>
 					      </LinkContainer>
@@ -62,24 +62,51 @@ const Header = () => {
 				  	  }
 			      
 
+{/*        	      	  <div className='navbar-icon'>
 				      {userInfo ? (
-                    		<Container className='navbar-icon'>
+                    		<div className='p-2'>
                             	<i className="fas fa-user-alt"></i>
-	                            <NavDropdown title='Аккаунт' id='username'>
+	                            <NavDropdown title='Аккаунт' id='username'  className='account-dropdown dropdown-menu-end'>
 	                                <LinkContainer to='/profile'>
 		                                    <NavDropdown.Item>Управление аккаунтом</NavDropdown.Item>
 	                                </LinkContainer>
                                 	<NavDropdown.Item onClick={logoutHandler}>Выйти</NavDropdown.Item>
                             	</NavDropdown>
-                            </Container>
+                            </div>
 
                             ) : (
                             <LinkContainer to='/login'>
                                 <Nav.Link><i className="fas fa-user"></i>Войти</Nav.Link>
                             </LinkContainer>
                         )}
+                        </div>*/}
 
+                        {userInfo ? (
+                        <div className='p-2'>
+	                        <Dropdown>
+							  <Dropdown.Toggle id="account-dropdown">
+								  <Container className='navbar-icon'>
+								      	<i className="fas fa-user-alt"></i>
+								     	<p>Аккаунт</p>
+							      </Container>
+							  </Dropdown.Toggle>
 
+							  <Dropdown.Menu align="right">
+							    <Dropdown.Item as={Link} to="/profile/">
+	                                Управление аккаунтом
+	                            </Dropdown.Item>
+							    <Dropdown.Item onClick={logoutHandler}>Выйти</Dropdown.Item>
+							  </Dropdown.Menu>
+							</Dropdown>
+						</div>) : (
+							<div className='navbar-icon'>
+								<LinkContainer to='/login'>
+	                                <Nav.Link><i className="fas fa-user"></i>
+	                                	<p>Войти</p>
+	                                </Nav.Link>
+	                            </LinkContainer>
+	                        </div>
+						)}
 
 				    </Nav>
 

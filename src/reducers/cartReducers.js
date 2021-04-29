@@ -26,7 +26,7 @@ export const cartReducer = (state = { cartItems: []}, action) => {
 
 		case CART_ADD_ITEM:
             const item = action.payload
-            const existItem = state.cartItems.find(x => x.sku === item.product)
+            const existItem = state.cartItems.find(x => x.id === item.id)
 
         	if (existItem){
         		return {
@@ -36,8 +36,9 @@ export const cartReducer = (state = { cartItems: []}, action) => {
         		}
         	}else{
         		return{
-        			...state,
-        			cartItems: [...state.cartItems, item]
+        			state
+        			// ...state,
+        			// cartItems: [...state.cartItems, item]
         		}
         	}
 
@@ -49,7 +50,7 @@ export const cartReducer = (state = { cartItems: []}, action) => {
 
 			return { 
 				...state,
-				cartItems: state.cartItems.filter(x => x.cart_item_id != action.payload)
+				cartItems: state.cartItems.filter(x => x.id != action.payload)
 			}
 
 		default:

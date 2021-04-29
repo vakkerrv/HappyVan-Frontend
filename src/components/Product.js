@@ -9,26 +9,27 @@ import { addToCart } from '../actions/cartActions'
 const Product = ({product}) => {
 	const dispatch = useDispatch()
 
-    const addToCartHandler = (sku) => {
-        dispatch(addToCart(sku))
+    const addToCartHandler = (id) => {
+        dispatch(addToCart(id))
     }
 
 	return(
 		<Card 
 		style={{ width: '18rem' }}
 		className = 'm-2 border-0'>
-			<Link to={`/product/${product.sku}`} className='d-flex justify-content-center'>
+			<Link to={`/product/${product.id}`} className='d-flex justify-content-center'>
 				<Card.Img variant="top" src={product.image[0].image} />	  	
 			</Link>
 
-			<Link to={`/product/${product.sku}`}>
+			<Link to={`/product/${product.id}`}>
 				<Card.Body>
-						<Card.Title>{product.name}</Card.Title>
+					<Card.Title>{product.name}</Card.Title>
+					{parseFloat(product.price).toFixed(0)} токенов
 				</Card.Body>
 			</Link>
 			
 			<Button 
-				onClick = {() => addToCartHandler(product.sku)} 
+				onClick = {() => addToCartHandler(product.id)} 
 				variant="primary" block
 			>
 				Add

@@ -3,7 +3,7 @@ import axios from "axios";
 import store from './store'
 import { logout } from './actions/userActions'
 
-const baseUrl = "http://localhost:3000/api";
+const baseUrl = "http://localhost:3000/api/1";
 
 
 
@@ -32,11 +32,12 @@ axios.interceptors.response.use(
     return response;
   },
     function (error) {
-      // const dispatch = useDispatch()
       const originalRequest = error.config;
-      // let refreshToken = localStorage.getItem("refreshToken");
-      let data = JSON.parse(localStorage.getItem('userInfo'))
-      let refreshToken = data.refresh;
+
+      let data = localStorage.getItem('userInfo') ? 
+                JSON.parse(localStorage.getItem('userInfo')) : null
+      let refreshToken = localStorage.getItem('userInfo') ? 
+                data.refresh : null
 
       if (error.response.status === 401 && originalRequest.url === 
         `${baseUrl}/token/refresh/`) {
@@ -80,12 +81,6 @@ const api = {
   refreshToken: (body) => {
     return axios.post(`${baseUrl}/accounts/refresh/`, body);
   },
-  // logout: (body) => {
-  //   return axios.delete(`${baseUrl}/accounts/logout/`, body);
-  // },
-  // nonProtected: (link) => {
-  //   return axios.get(`${baseUrl}/${link}`);
-  // },
   get: (link) => {
     return axios.get(`${baseUrl}/${link}`);
   },

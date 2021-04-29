@@ -7,6 +7,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { subscribe } from '../actions/subsActions'
 
 export const ProfileTab = () => {
+    const userLogin = useSelector(state => state.userLogin)
+    const { userInfo } = userLogin
+
 
 	return(
 		<div className='settings-block pb-2'>
@@ -23,15 +26,15 @@ export const ProfileTab = () => {
 						  <tbody>
 						    <tr>
 						      <td>Имя</td>
-						      <td>Mark</td>
+						      <td>{userInfo.first_name}</td>
 						    </tr>
 						    <tr>
 						      <td>Фамилия</td>
-						      <td>Jacob</td>
+						      <td>{userInfo.last_name}</td>
 						    </tr>
 						    <tr>
 						      <td>Электронная почта</td>
-						      <td></td>
+						      <td>{userInfo.email}</td>
 						    </tr>
 						  </tbody>
 						</Table>
@@ -100,9 +103,6 @@ export const SubscriptionTab = ({ history }) => {
 
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
-
-    // const subscription = useSelector(state => state.subscription)
-    // const { userInfo } = userLogin
 
     useEffect(() => {
         if (!userInfo) {
