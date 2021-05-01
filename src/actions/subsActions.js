@@ -1,19 +1,20 @@
 import api from "../api";
 import {
     SUBSCRIBE,
+    UNSUBSCRIBE,
+    SUBSCRIPTION_DETAIL_REQUEST,
+    SUBSCRIPTION_DETAIL_SUCCESS,
+    SUBSCRIPTION_DETAIL_FAIL,
+
 } from '../constants/subsConstants'
 
-export const subscribe = (id, type) => async (dispatch, getState) => {
-    const {
-        userLogin: { userInfo },
-    } = getState()
-
+export const subscribe = (type) => async (dispatch, getState) => {
     const body = {
-        user_id: id, subscription_type: type,
+        sub_plan_id: type,
     }
 
     const { data } = await api.post(
-        'order/subscribe/',
+        'sub/subscribe/',
         body,
         )
 
@@ -21,21 +22,45 @@ export const subscribe = (id, type) => async (dispatch, getState) => {
         type: SUBSCRIBE, 
         payload: data })
 
-    localStorage.setItem('subscription', JSON.stringify(getState().subscription))
+    dispatch(getSubscriptionDetail())
+
+    localStorage.setItem('subInfo', JSON.stringify(getState().subscription.details))
 }
 
 
-// export const removeFromCart = (id) => async (dispatch, getState) => {
+
+export const getSubscriptionDetail = (sub_id) => async (dispatch) => {
+    try {
+        dispatch({ type: SUBSCRIPTION_DETAIL_REQUEST })
+
+        const { data } = await api.get(`/sub/sub-details/`)
+
+        dispatch({
+            type: SUBSCRIPTION_DETAIL_SUCCESS,
+            payload: data
+        })
+
+        localStorage.setItem('subInfo', JSON.stringify(data))
+
+    } catch (error) {
+        dispatch({
+            type: SUBSCRIPTION_DETAIL_FAIL,
+            payload: error.response && error.response.data.detail
+                ? error.response.data.detail
+                : error.message,
+        })
+    }
+}
+
+
+export const unsubscribe = (id) => async (dispatch, getState) => {
     
-//     const { data } = await api.delete(
-//         `cart/remove/${id}`)
+    await api.delete(`sub/unsubscribe/${id}`)
 
-//     dispatch({
-//     type: CART_REMOVE_ITEM,
-//     payload: id,
-//     })
+    dispatch({
+        type: UNSUBSCRIBE,
+    })
 
-
-//     localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems))
-// }
+    localStorage.removeItem('subInfo')
+}
 

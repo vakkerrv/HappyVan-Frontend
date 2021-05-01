@@ -1,6 +1,5 @@
-import React, { Component } from 'react';
+import React, { } from 'react';
 import { Image, Container, Row, Col, ListGroup } from 'react-bootstrap';
-import { LinkContainer } from 'react-router-bootstrap';
 
 const Footer = () => {
     return (

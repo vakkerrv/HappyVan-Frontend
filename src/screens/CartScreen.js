@@ -1,7 +1,7 @@
 import React, { useEffect, useState, Fragment } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { Container, ListGroup, Button, Row, Col } from 'react-bootstrap';
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 
 import CartItem from '../components/CartItem'
 import BagItem from '../components/BagItem'
@@ -12,18 +12,16 @@ import { fetchBagList } from '../actions/bagActions'
 import { BAG_STATUS_TO_RETURN } from '../constants/bagConstants'
 
 const CartScreen = ({ history }) => {
-    const [totalPrice, setTotalPrice] = useState(0)
-
     const dispatch = useDispatch()
 
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
 
     const bag = useSelector(state => state.bag)
-    const { bagError, bagLoading, bagItems } = bag
+    const { bagItems } = bag
 
     const cart = useSelector(state => state.cart)
-    const { cartError, cartLoading, cartItems } = cart
+    const { cartItems } = cart
 
     useEffect(() => {
         if (!userInfo) {

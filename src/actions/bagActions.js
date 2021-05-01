@@ -3,7 +3,7 @@ import {
     BAG_LIST_REQUEST,
     BAG_LIST_SUCCESS,
     BAG_LIST_FAIL,
-    BAG_ITEM_RETURN,
+    // BAG_ITEM_RETURN,
 } from '../constants/bagConstants'
 
 export const fetchBagList = () => async (dispatch, getState) => {
@@ -30,15 +30,11 @@ export const fetchBagList = () => async (dispatch, getState) => {
 
 
 export const returnItem = (id, status) => async (dispatch, getState) => {
-    const {
-        userLogin: { userInfo },
-    } = getState()
-
     const body = {
         status: status
     }
 
-    const { data } = await api.put(
+    await api.put(
         `bag/bag-item/update/${id}/`,
         body,
         )

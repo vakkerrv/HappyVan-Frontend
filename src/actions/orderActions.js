@@ -38,7 +38,7 @@ export const createOrder = () => async (dispatch, getState) => {
     } = getState()
 
 
-    const { data } = await api.post(
+    await api.post(
             `order/new-order/`,
             {subscription_id: 1}) // we should have subscription_id OR we can identify the user with the token
 

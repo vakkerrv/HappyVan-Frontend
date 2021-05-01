@@ -15,6 +15,10 @@ import {
 } from './reducers/cartReducers'
 
 import {
+    wishlistReducer,
+} from './reducers/wishlistReducers'
+
+import {
     orderReducer,
 } from './reducers/orderReducers'
 
@@ -36,6 +40,8 @@ const reducer = combineReducers({
 
     bag: bagReducer,
     cart: cartReducer,
+    wishlist: wishlistReducer,
+
     order: orderReducer,
 
     subscription: subsReducer,
@@ -43,9 +49,15 @@ const reducer = combineReducers({
 
 const userInfoFromStorage = localStorage.getItem('userInfo') ?
     JSON.parse(localStorage.getItem('userInfo')) : null
+const subInfoFromStorage = localStorage.getItem('subInfo') ?
+    JSON.parse(localStorage.getItem('subInfo')) : null
+const wishlistFromStorage = localStorage.getItem('wishlist') ?
+    JSON.parse(localStorage.getItem('wishlist')) : []
 
 const initialState = {
     userLogin: { userInfo: userInfoFromStorage },
+    subscription: { details: subInfoFromStorage },
+    wishlist: { wishlistItems: wishlistFromStorage },
 }
 
 const middleware = [thunk]

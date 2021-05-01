@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import { Link, NavLink } from 'react-router-dom'
-import { Card, Button, Container } from 'react-bootstrap';
-import { LinkContainer } from 'react-router-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { } from 'react';
+import { Link } from 'react-router-dom'
+import { Card, Button } from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
 
 import { addToCart } from '../actions/cartActions'
+import { addToWishlist } from '../actions/wishlistActions'
 
 const Product = ({product}) => {
 	const dispatch = useDispatch()
@@ -12,6 +12,11 @@ const Product = ({product}) => {
     const addToCartHandler = (id) => {
         dispatch(addToCart(id))
     }
+
+    const addToWishlistHandler = (id) => {
+        dispatch(addToWishlist(id))
+    }
+
 
 	return(
 		<Card 
@@ -32,7 +37,14 @@ const Product = ({product}) => {
 				onClick = {() => addToCartHandler(product.id)} 
 				variant="primary" block
 			>
-				Add
+				В корзину
+			</Button>
+
+			<Button 
+				onClick = {() => addToWishlistHandler(product.id)} 
+				variant="primary" block
+			>
+				В избранное
 			</Button>
 			
 		</Card>

@@ -50,7 +50,7 @@ export const cartReducer = (state = { cartItems: []}, action) => {
 
 			return { 
 				...state,
-				cartItems: state.cartItems.filter(x => x.id != action.payload)
+				cartItems: state.cartItems.filter(x => x.id !== action.payload)
 			}
 
 		default:

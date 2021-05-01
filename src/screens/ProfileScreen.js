@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
-import { Container, Form, Button, Row, Col, Tabs, Tab } from 'react-bootstrap'
+import { Container, Row, Col, Tabs, Tab } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
-import { ProfileTab, SubscriptionTab } from '../components/ProfileSettings'
+import { ProfileTab } from '../components/ProfileSettings'
+import { SubscriptionTab } from '../components/SubscriptionTab'
 
 import { subscribe } from '../actions/subsActions'
 
 const ProfileScreen = ({ history }) => {
     const [subType, setSubType] = useState(1)
-
 
     const dispatch = useDispatch()
 

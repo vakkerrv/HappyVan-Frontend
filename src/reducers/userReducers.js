@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React, { } from 'react';
 import {USER_LOGIN_REQUEST, 
 		USER_LOGIN_SUCCESS,
 		USER_LOGIN_FAIL,

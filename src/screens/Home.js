@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React, { } from 'react';
 import LandingSection from '../components/LandingSection'
 import Section2 from '../components/Section2'
 

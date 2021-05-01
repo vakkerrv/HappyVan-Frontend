@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Navbar, Nav, Container, Row, Image, NavDropdown, Dropdown } from 'react-bootstrap';
+import React, { } from 'react';
+import { Navbar, Nav, Container, Image, Dropdown } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -40,7 +40,7 @@ const Header = () => {
 
 				    <Nav className="navbar-base ml-auto">
 		      
-  				      <LinkContainer to='/'>
+  				      <LinkContainer to='/wishlist'>
 				      	<Nav.Link>
 				      		<Container className='navbar-icon'>
 						      	<i className="fas fa-heart"></i>

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
 import { Container, Form, Button, Row, Col, Alert } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 // import Loader from '../components/Loader'
@@ -18,7 +17,7 @@ const RegisterScreen = ({ location, history }) => {
     const dispatch = useDispatch()
 
     const userRegister = useSelector(state => state.userRegister)
-    const { error, loading, userInfo } = userRegister
+    const { userInfo } = userRegister
 
     useEffect(() => {
         if (userInfo) {

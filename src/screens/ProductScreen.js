@@ -1,20 +1,19 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 
-import { Link } from 'react-router-dom'
-import { Row, Col, Button, Container, Image } from 'react-bootstrap';
+import { Row, Col, Container, Image } from 'react-bootstrap';
 
 import { detailProduct } from '../actions/productActions'
 
 const ProductScreen = ({ match, history }) => {
 	const dispatch = useDispatch()
 	const productDetail = useSelector(state => state.product)
-	const { error, loading, product } = productDetail
+	const { product } = productDetail
 
 	console.log('product', product)
 
 	useEffect(() => {
-		dispatch(detailProduct(match.params.sku))
+		dispatch(detailProduct(match.params.id))
 	}, [dispatch, match])
 
 	return(

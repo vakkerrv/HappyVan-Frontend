@@ -1,6 +1,6 @@
 import api from "../api";
 import {
-    CART_ADD_ITEM,
+    // CART_ADD_ITEM,
     CART_REMOVE_ITEM,
 
     CART_LIST_REQUEST,
@@ -9,7 +9,7 @@ import {
 
 } from '../constants/cartConstants'
 
-export const fetchCartList = () => async (dispatch, getState) => {
+export const fetchCartList = () => async (dispatch) => {
     try {
         dispatch({ type: CART_LIST_REQUEST })
 
@@ -39,7 +39,7 @@ export const addToCart = (item_id) => async () => {
         status: 'new'
     }
 
-    const { data } = await api.post(
+    await api.post(
         'cart/cart-item/add/',
         body,
         )
@@ -54,7 +54,7 @@ export const addToCart = (item_id) => async () => {
 
 export const removeFromCart = (id) => async (dispatch, getState) => {
     
-    const { data } = await api.delete(
+    await api.delete(
         `cart/cart-item/remove/${id}`)
 
     dispatch({

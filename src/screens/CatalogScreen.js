@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import { Navbar, Nav, Container, Row, Col, Image, CardGroup } from 'react-bootstrap';
-import { LinkContainer } from 'react-router-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 
 import Product from '../components/Product'
 import { listProducts } from '../actions/productActions'
@@ -9,7 +8,7 @@ import { listProducts } from '../actions/productActions'
 const CatalogScreen = () => {
     const dispatch = useDispatch()
     const productList = useSelector(state => state.productList)
-    const { error, loading, products } = productList
+    const { products } = productList
 
     useEffect(() => {
         dispatch(listProducts())

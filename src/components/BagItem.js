@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux'
-import { Container, Row, Col, Image, ListGroup, Form, Button } from 'react-bootstrap';
-import { LinkContainer } from 'react-router-bootstrap';
+import { useDispatch } from 'react-redux'
+import { Row, Col, Image, Button } from 'react-bootstrap';
 
 import { returnItem } from '../actions/bagActions'
 

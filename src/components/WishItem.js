@@ -2,21 +2,21 @@ import React, {  } from 'react';
 import { useDispatch } from 'react-redux'
 import { Row, Col, Image, Button } from 'react-bootstrap';
 
-import { removeFromCart } from '../actions/cartActions'
+import { removeFromWishlist } from '../actions/wishlistActions'
 
-const CartItem = ({item, id}) => {
+const WishItem = ({item_details, id}) => {
     const dispatch = useDispatch()
 
-    const removeFromCartHandler = (id) => {
-        dispatch(removeFromCart(id))
+    const removeFromWishlistHandler = (id) => {
+        dispatch(removeFromWishlist(id))
     }
 
     return (
 
         <Row>
             <Col md={3}>
-                {item.image ? (
-                    <Image src={item.image[0].image} alt={'image'} fluid rounded />
+                {item_details.image ? (
+                    <Image src={item_details.image[0].image} alt={'image'} fluid rounded />
                     ) : (
                     <Image alt={'image'} fluid rounded />
                     )
@@ -25,19 +25,19 @@ const CartItem = ({item, id}) => {
 
             <Col md={9}>
                 <h4 className='cart-name'>
-                    {item.name}
+                    {item_details.name}
                 </h4>
 
                 <div className='d-flex flex-row'>
                     <div className='my-4'>
-                        {parseFloat(item.price).toFixed(0)} токенов
+                        {parseFloat(item_details.price).toFixed(0)} токенов
                     </div>
                         
 
                         <Button
                             type='button'
                             variant='white'
-                            onClick={() => removeFromCartHandler(id)}
+                            onClick={() => removeFromWishlistHandler(id)}
                         >
                             <i className='fas fa-trash'></i>
                         </Button>
@@ -50,4 +50,4 @@ const CartItem = ({item, id}) => {
 }
 
 
-export default CartItem;
+export default WishItem;

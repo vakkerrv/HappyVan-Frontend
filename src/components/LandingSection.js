@@ -1,8 +1,8 @@
-import React, { PropTypes } from 'react';
-import { Container, Row, Col, Button, Nav } from 'react-bootstrap';
+import React, { } from 'react';
+import { Container } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
-import { Link } from 'react-router-dom';
-import background from "../images/landing-section-image.svg";
+// import { Link } from 'react-router-dom';
+// import background from "../images/landing-section-image.svg";
 
 const LandingSection = () => {
 

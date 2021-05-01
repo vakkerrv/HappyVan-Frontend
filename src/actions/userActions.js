@@ -8,6 +8,7 @@ import {USER_LOGIN_REQUEST,
 		USER_REGISTER_SUCCESS,
 		USER_REGISTER_FAIL,} from '../constants/userConstants';
 
+import { getSubscriptionDetail } from './subsActions'
 
 export const login = (username, password) => async(dispatch) => {
 	try{
@@ -24,7 +25,10 @@ export const login = (username, password) => async(dispatch) => {
 			payload: data,
 		})
 
+		// let {sub, ...userInfo} = data;
 		localStorage.setItem('userInfo', JSON.stringify(data))
+
+		dispatch(getSubscriptionDetail())
 
 	}catch(error) {
 		dispatch({
@@ -44,7 +48,7 @@ export const logout = () => (dispatch) => {
 
 	localStorage.removeItem('userInfo')
 	localStorage.removeItem('cartItems')
-	localStorage.removeItem('subscription')
+	localStorage.removeItem('subInfo')
 }
 
 
