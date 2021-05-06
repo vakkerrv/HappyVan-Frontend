@@ -6,7 +6,7 @@ import { Container } from 'react-bootstrap';
 const AboutScreen = () => {
     return (
         <Container>
-        	<h1>About us</h1>
+        	<h1>О нас</h1>
     	</Container>
     );
 };

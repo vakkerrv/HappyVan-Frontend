@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react'
 import { Row, Col, Button, Table } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 
-export const ProfileTab = () => {
+const ProfileTab = () => {
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
 
@@ -90,3 +90,6 @@ export const ProfileTab = () => {
 	)
 
 }
+
+export default ProfileTab;
+

@@ -1,36 +1,26 @@
 import React, { useState, useEffect } from 'react'
-// import { Link, NavLink } from 'react-router-dom'
 import { Row, Col, Button, Table } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
+import { withRouter } from 'react-router-dom'
 
-import { subscribe, unsubscribe, getSubscriptionDetail } from '../actions/subsActions'
+import { unsubscribe, getSubscriptionDetail } from '../actions/subsActions'
 
-export const SubscriptionTab = ({ history }) => {
-    const [subType, setSubType] = useState(1)
-    // const [subDetails, setSubDetails] = useState({})
-
+const SubscriptionTab = ({ history }) => {
     const dispatch = useDispatch()
-
-    const userLogin = useSelector(state => state.userLogin)
-    const { userInfo } = userLogin
 
     const subscription = useSelector(state => state.subscription)
     const { details } = subscription
 
     useEffect(() => {
-        if (!userInfo) {
-            history.push('/')
-        }else{
-        	if(details){     		
-	        	dispatch(getSubscriptionDetail()) // retrieve with user id, not sub id
-        	}
-        }
-    }, [dispatch, history, userInfo])
+    	if(details){     		
+        	dispatch(getSubscriptionDetail())
+    	}
+    }, [dispatch, history])
 
     const SubscribeHandler = (e) => {
         e.preventDefault()
         if(!details){
-            dispatch(subscribe(subType))
+        	history.push('/register/plan')
         }
     }
 
@@ -46,7 +36,7 @@ export const SubscriptionTab = ({ history }) => {
 	    const subDetails = details.sub_plan_id
 	    subInfo = [
 			{key: 'Тип', value: subDetails.id},
-	    	{key: 'Всего токенов', value: 5000},
+	    	{key: 'Всего токенов', value: subDetails.allowance},
 	    	{key: 'Доступно токенов', value: 1000},
 	    	{key: 'Использовано токенов', value: 4000},
 	    	{key: 'Стоимость подписки', value:  parseFloat(subDetails.price).toFixed(0)},
@@ -107,5 +97,5 @@ export const SubscriptionTab = ({ history }) => {
 
 }
 
-
+export default withRouter(SubscriptionTab);
 

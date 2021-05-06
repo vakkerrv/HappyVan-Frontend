@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { logout } from '../actions/userActions'
 
-const Header = () => {
+const Header = ({ history }) => {
     const dispatch = useDispatch()
 
     const userLogin = useSelector(state => state.userLogin)
@@ -14,6 +14,7 @@ const Header = () => {
 
     const logoutHandler = () => {
         dispatch(logout())
+        history.push('/')
     }
 
     return (
@@ -29,6 +30,7 @@ const Header = () => {
 				  <Navbar.Toggle aria-controls="basic-navbar-nav" />
 
 				  <Navbar.Collapse id="basic-navbar-nav">
+				    
 				    <Nav className="navbar-base mr-auto">
 				      <LinkContainer to='/catalog'>
 				      	<Nav.Link>Каталог</Nav.Link>
@@ -40,46 +42,27 @@ const Header = () => {
 
 				    <Nav className="navbar-base ml-auto">
 		      
-  				      <LinkContainer to='/wishlist'>
-				      	<Nav.Link>
-				      		<Container className='navbar-icon'>
-						      	<i className="fas fa-heart"></i>
-				      			<p>Избранное</p>
-					      	</Container>
-				      	</Nav.Link>
-				      </LinkContainer>
-  				      
-  				      {userInfo ? (
-	  				      <LinkContainer to='/cart'>
+				      {userInfo ? (
+	  				      <LinkContainer to='/wishlist'>
 					      	<Nav.Link>
 					      		<Container className='navbar-icon'>
-							      	<i className="fas fa-shopping-cart"></i>
-							     	<p>Коризна</p>
+							      	<i className="fas fa-heart"></i>
+					      			<p>Избранное</p>
 						      	</Container>
 					      	</Nav.Link>
 					      </LinkContainer>
 					      ) : (void 0)
 				  	  }
+  				      
+  				      <LinkContainer to='/cart'>
+				      	<Nav.Link>
+				      		<Container className='navbar-icon'>
+						      	<i className="fas fa-shopping-cart"></i>
+						     	<p>Коризна</p>
+					      	</Container>
+				      	</Nav.Link>
+				      </LinkContainer>
 			      
-
-{/*        	      	  <div className='navbar-icon'>
-				      {userInfo ? (
-                    		<div className='p-2'>
-                            	<i className="fas fa-user-alt"></i>
-	                            <NavDropdown title='Аккаунт' id='username'  className='account-dropdown dropdown-menu-end'>
-	                                <LinkContainer to='/profile'>
-		                                    <NavDropdown.Item>Управление аккаунтом</NavDropdown.Item>
-	                                </LinkContainer>
-                                	<NavDropdown.Item onClick={logoutHandler}>Выйти</NavDropdown.Item>
-                            	</NavDropdown>
-                            </div>
-
-                            ) : (
-                            <LinkContainer to='/login'>
-                                <Nav.Link><i className="fas fa-user"></i>Войти</Nav.Link>
-                            </LinkContainer>
-                        )}
-                        </div>*/}
 
                         {userInfo ? (
                         <div className='p-2'>

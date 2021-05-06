@@ -14,8 +14,6 @@ import {
 export const fetchWishlist = () => async (dispatch, getState) => {
     try {
 
-        // const { userInfo } = getState().userLogin
-
         dispatch({ type: WISHLIST_REQUEST })
 
         const { data } = await api.get(
@@ -27,11 +25,6 @@ export const fetchWishlist = () => async (dispatch, getState) => {
         })
 
         localStorage.setItem('wishlist', JSON.stringify(getState().wishlist.wishlistItems))
-        // } else {
-        //     dispatch({
-        //         type: UNAUT_WISHLIST,
-        //         payload: getState().wishlist.wishlistItems
-        //     })
 
     } catch (error) {
         dispatch({

@@ -69,6 +69,6 @@ export const createOrder = () => async (dispatch, getState) => {
 
     dispatch(fetchOrderList())
     dispatch(fetchCartList())
-    localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems))
+    // localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems))
 }
 

@@ -30,8 +30,9 @@ import {
     bagReducer,
 } from './reducers/bagReducers'
 
+import { USER_LOGOUT } from './constants/userConstants'
 
-const reducer = combineReducers({
+const appReducer = combineReducers({
     userLogin: userLoginReducer,
     userRegister: userRegisterReducer,
 
@@ -47,17 +48,28 @@ const reducer = combineReducers({
     subscription: subsReducer,
 })
 
+const reducer = (state, action) => {
+  if (action.type === USER_LOGOUT) {
+    return appReducer(undefined, action)
+  }
+
+  return appReducer(state, action)
+}
+
 const userInfoFromStorage = localStorage.getItem('userInfo') ?
     JSON.parse(localStorage.getItem('userInfo')) : null
 const subInfoFromStorage = localStorage.getItem('subInfo') ?
     JSON.parse(localStorage.getItem('subInfo')) : null
 const wishlistFromStorage = localStorage.getItem('wishlist') ?
     JSON.parse(localStorage.getItem('wishlist')) : []
+const cartFromStorage = localStorage.getItem('cartItems') ?
+    JSON.parse(localStorage.getItem('cartItems')) : []
 
 const initialState = {
     userLogin: { userInfo: userInfoFromStorage },
     subscription: { details: subInfoFromStorage },
     wishlist: { wishlistItems: wishlistFromStorage },
+    cart: { cartItems: cartFromStorage },
 }
 
 const middleware = [thunk]

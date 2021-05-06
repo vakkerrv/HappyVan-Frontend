@@ -38,9 +38,9 @@ const RegisterScreen = ({ location, history }) => {
             setMessage('Passwords do not match')
         } else {
             dispatch(register(user_register_data))
+            history.push('/register/plan')
         }
     }
-
 
     return (
         <Container>

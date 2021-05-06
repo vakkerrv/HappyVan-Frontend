@@ -5,6 +5,9 @@ import CatalogScreen from './screens/CatalogScreen'
 import LoginScreen from './screens/LoginScreen'
 import ProfileScreen from './screens/ProfileScreen'
 import RegisterScreen from './screens/RegisterScreen'
+import RegisterAddressScreen from './screens/RegisterAddressScreen'
+import PaymentScreen from './screens/PaymentScreen'
+import SelectPlanScreen from './screens/SelectPlanScreen'
 import ProductScreen from './screens/ProductScreen'
 import CartScreen from './screens/CartScreen'
 import WishlistScreen from './screens/WishlistScreen'
@@ -21,7 +24,10 @@ function App() {
         <Route path='/about' component={AboutScreen} />
         <Route path='/catalog' component={CatalogScreen} />
         <Route path='/login' component={LoginScreen} />
-        <Route path='/register' component={RegisterScreen} />
+        <Route path='/register' component={RegisterScreen} exact/>
+        <Route path='/register/address' component={RegisterAddressScreen} />
+        <Route path='/register/plan' component={SelectPlanScreen} />
+        <Route path='/register/payment' component={PaymentScreen} />
         <Route path='/profile' component={ProfileScreen} />
         <Route path='/product/:id' component={ProductScreen} />
         <Route path='/cart/' component={CartScreen} />

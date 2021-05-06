@@ -282,8 +282,52 @@ a, a:hover{
 	opacity: 60%;
 }
 
+.get-started-button{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 20%;
+	height: 50px;
+	background-color: var(--blue);
+}
 
 /* Cart screen ends */
 
 
 
+/* Subscription plans */
+.table-plans{
+	vertical-align: middle;
+}
+
+
+.table-plans .value-cells{
+	text-align: center;
+}
+
+.parameter-name-cells{
+	width:40%;
+}
+
+.option-selector > div{
+	width: 60%;
+}
+
+.option-selector > div > label{
+	padding: 0.25rem;
+	height: 100px;
+	margin: 1.5rem;
+	margin-bottom: 2rem!important;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: var(--blue);
+	border: none;
+}
+
+#submit-plan{
+	background-color: var(--blue);
+	border:none;
+}
+
+/* Subscription plans */

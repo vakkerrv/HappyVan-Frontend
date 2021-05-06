@@ -6,9 +6,14 @@ import {USER_LOGIN_REQUEST,
 
 		USER_REGISTER_REQUEST, 
 		USER_REGISTER_SUCCESS,
-		USER_REGISTER_FAIL,} from '../constants/userConstants';
+		USER_REGISTER_FAIL,
+
+		USER_ADD_ADDRESS_SUCCESS,
+		USER_ADD_ADDRESS_FAIL,
+	} from '../constants/userConstants';
 
 import { getSubscriptionDetail } from './subsActions'
+import { addListToCart } from '../actions/cartActions'
 
 export const login = (username, password) => async(dispatch) => {
 	try{
@@ -25,7 +30,6 @@ export const login = (username, password) => async(dispatch) => {
 			payload: data,
 		})
 
-		// let {sub, ...userInfo} = data;
 		localStorage.setItem('userInfo', JSON.stringify(data))
 
 		dispatch(getSubscriptionDetail())
@@ -49,10 +53,11 @@ export const logout = () => (dispatch) => {
 	localStorage.removeItem('userInfo')
 	localStorage.removeItem('cartItems')
 	localStorage.removeItem('subInfo')
+	localStorage.removeItem('wishlist')
 }
 
 
-export const register = (output) => async(dispatch) => {
+export const register = (output) => async(dispatch, getState) => {
 	try{
 		dispatch({
 			type: USER_REGISTER_REQUEST
@@ -67,16 +72,38 @@ export const register = (output) => async(dispatch) => {
 			payload: data,
 		})
 
-        dispatch({
-            type: USER_LOGIN_SUCCESS,
-            payload: data
-        })
+        dispatch(login(output.username, output.password))
 
-        localStorage.setItem('userInfo', JSON.stringify(data))
+        // Save a cart of non-authorized user 
+	    const { cartItems } = getState().cart
+        dispatch(addListToCart(cartItems.map(x => x.item_id.id)))
 
 	}catch(error) {
 		dispatch({
 			type: USER_REGISTER_FAIL,
+			payload: error.response && error.response.data.detail
+			? error.response.data.detail
+			: error.message,
+		})
+	}
+}
+
+
+export const addAddress = (address) => async(dispatch) => {
+	try{
+		const { data } = await api.post(
+			'accounts/address/add/', 
+			address,
+			)
+
+		dispatch({
+			type: USER_ADD_ADDRESS_SUCCESS,
+			payload: data,
+		})
+
+	}catch(error) {
+		dispatch({
+			type: USER_ADD_ADDRESS_FAIL,
 			payload: error.response && error.response.data.detail
 			? error.response.data.detail
 			: error.message,

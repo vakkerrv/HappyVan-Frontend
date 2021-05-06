@@ -1,13 +1,16 @@
 import React, { } from 'react';
 import { Link } from 'react-router-dom'
 import { Card, Button } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { addToCart } from '../actions/cartActions'
 import { addToWishlist } from '../actions/wishlistActions'
 
 const Product = ({product}) => {
 	const dispatch = useDispatch()
+
+    const userLogin = useSelector(state => state.userLogin)
+    const { userInfo } = userLogin
 
     const addToCartHandler = (id) => {
         dispatch(addToCart(id))
@@ -40,12 +43,16 @@ const Product = ({product}) => {
 				В корзину
 			</Button>
 
-			<Button 
-				onClick = {() => addToWishlistHandler(product.id)} 
-				variant="primary" block
-			>
+			{userInfo ? (
+				<Button 
+					onClick = {() => addToWishlistHandler(product.id)} 
+					variant="primary" block
+				>
 				В избранное
 			</Button>
+				) : (
+				<div></div>
+				)}
 			
 		</Card>
 	)
