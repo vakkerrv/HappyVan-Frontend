@@ -31,6 +31,9 @@ function PlaceOrderScreen({ history }) {
     const orderCreate = useSelector(state => state.orderCreate)
     const { order, error, success: orderCreateSuccess } = orderCreate
 
+    const subscription = useSelector(state => state.subscription)
+    const { details } = subscription
+
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -49,6 +52,7 @@ function PlaceOrderScreen({ history }) {
     const placeOrder = (e) => {
         e.preventDefault()
         dispatch(createOrder({
+            subscription_id: details.id,
             delivery_option: 'standard',
             delivery_date: 2,
             delivery_time_from: 5, 
