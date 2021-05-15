@@ -15,7 +15,7 @@ const WishlistScreen = (  ) => {
     const { wishlistItems } = wishlist
 
     useEffect(() => {
-        if (userInfo){
+        if (userInfo && wishlistItems===0){
             dispatch(fetchWishlist())
         }
     }, [userInfo, dispatch])

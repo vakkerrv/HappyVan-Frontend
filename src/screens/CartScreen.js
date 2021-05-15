@@ -17,7 +17,12 @@ const CartScreen = (  ) => {
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
 
-    const { details } = useSelector(state => state.subscription)
+
+    const subscription = useSelector(state => state.subscription)
+    const { details: subDetails } = subscription
+
+    const address = useSelector(state => state.address)
+    const { addressInfo } = address
 
     const bag = useSelector(state => state.bag)
     const { bagItems } = bag
@@ -26,17 +31,32 @@ const CartScreen = (  ) => {
     const { cartItems } = cart
 
     useEffect(() => {
-        if (userInfo) {
+        if (userInfo && cartItems.length===0) {
             dispatch(fetchCartList()) 
         }
-        if (details){
+        if (subDetails.id && bagItems.length===0){
             dispatch(fetchBagList())
         }
-    }, [userInfo, details, dispatch])
+    }, [userInfo, subDetails, dispatch])
 
     const createOrderHandler = () => {
         dispatch(createOrder())
     }
+
+    const nextStepObj = {}
+    if (userInfo && subDetails.id && addressInfo.id){
+        nextStepObj['link'] = '/placeorder'
+    }else if (userInfo && subDetails.id){
+        nextStepObj['link'] = '/register/address'       
+    }else if (userInfo){
+        nextStepObj['link'] = '/register/plan'              
+    }else if (userInfo){
+            nextStepObj['link'] = '/register'              
+    }else{
+        nextStepObj['link'] = '/register'
+    }
+
+    const {amount} = useSelector(state => state.token)
 
     return (
         <Fragment>
@@ -65,7 +85,7 @@ const CartScreen = (  ) => {
                     }
                     </Col>
 
-                    {details ? (
+                    {subDetails.id ? (
                         <Col md={6}  id='onhand-items'>
                         <h2 className='window-name'>Текущий набор</h2>
 
@@ -78,13 +98,13 @@ const CartScreen = (  ) => {
                                         {bagItems.map(item => (
                                             <ListGroup.Item 
                                                 key={item.id} 
-                                                className={item.status===BAG_STATUS_TO_RETURN ? 'bag-item-return' : 'bag-item-active'}
+                                                className={item.to_return ? 'bag-item-return' : 'bag-item-active'}
                                                 // className={'bag-item-return'}
                                             >
                                                 <BagItem 
                                                     item = {item.item_id} 
                                                     id = {item.id}
-                                                    status = {item.status}/>
+                                                    status = {item.to_return}/>
                                             </ListGroup.Item>
                                             ))
                                         }
@@ -104,7 +124,7 @@ const CartScreen = (  ) => {
 
         <div className='cart-footer container-fluid'>
 
-            {details ? (
+            {/*{subDetails ? (
                 <div className='d-flex flex-row-reverse'>
                     <Button 
                         className='mx-3'
@@ -125,18 +145,32 @@ const CartScreen = (  ) => {
                         } токенов
                     </div>
                 </div>
-                ) : (
+                ) : (*/}
                     <LinkContainer 
-                        to='/register/plan'
+                        to={nextStepObj.link}
                     >
                         <div className='d-flex flex-row-reverse'>
                             <div className='get-started-button'>
-                                Оформить подписку
+                                Продолжить
+                            </div>
+
+                            <div className="text-end mx-2">
+                                {!userInfo ? (
+                                    <div>
+                                        <h2>Токенов выбрано</h2>
+                                        {amount.totalTokenAmount}
+                                    </div>
+                                    ) : (
+                                    <div>
+                                        <h2>Токенов выбрано / Токенов осталось</h2>
+                                        {amount.totalTokenAmount} / {amount.leftTokenAmount}
+                                    </div>
+                                    )}
                             </div>
                         </div>
                     </LinkContainer>
-                )
-            }
+                {/*)*/}
+            {/*}*/}
 
             
         </div>

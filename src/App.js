@@ -11,6 +11,10 @@ import SelectPlanScreen from './screens/SelectPlanScreen'
 import ProductScreen from './screens/ProductScreen'
 import CartScreen from './screens/CartScreen'
 import WishlistScreen from './screens/WishlistScreen'
+import PlaceOrderScreen from './screens/PlaceOrderScreen'
+import PaymentSubscriptionScreen from './screens/PaymentSubscriptionScreen'
+import PaymentOrderScreen from './screens/PaymentOrderScreen'
+
 import Header from './components/Header'
 import Footer from './components/Footer'
 
@@ -25,13 +29,16 @@ function App() {
         <Route path='/catalog' component={CatalogScreen} />
         <Route path='/login' component={LoginScreen} />
         <Route path='/register' component={RegisterScreen} exact/>
-        <Route path='/register/address' component={RegisterAddressScreen} />
+        <Route path='/register/address/plan-:planId' component={RegisterAddressScreen} />
         <Route path='/register/plan' component={SelectPlanScreen} />
         <Route path='/register/payment' component={PaymentScreen} />
         <Route path='/profile' component={ProfileScreen} />
         <Route path='/product/:id' component={ProductScreen} />
-        <Route path='/cart/' component={CartScreen} />
-        <Route path='/wishlist/' component={WishlistScreen} />
+        <Route path='/cart' component={CartScreen} />
+        <Route path='/wishlist' component={WishlistScreen} />
+        <Route path='/placeorder' component={PlaceOrderScreen} />
+        <Route path='/sub_payment/plan-:id/' component={PaymentSubscriptionScreen} />
+        <Route path='/order_payment' component={PaymentOrderScreen} />
       </main>
       <Footer />     
     </Router>

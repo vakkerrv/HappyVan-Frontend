@@ -33,14 +33,9 @@ export const fetchOrderList = () => async (dispatch) => {
 
 export const createOrder = () => async (dispatch, getState) => {
 
-    const {
-        order: { orderItems },
-    } = getState()
-
-
-    await api.post(
-            `order/new-order/`,
-            {subscription_id: 1}) // we should have subscription_id OR we can identify the user with the token
+    // await api.post(
+    //         `order/new-order/`,
+    //         {subscription_id: 1}) 
 
 
     // Add new items to the order
@@ -67,8 +62,8 @@ export const createOrder = () => async (dispatch, getState) => {
     //         body)
     // }
 
-    dispatch(fetchOrderList())
-    dispatch(fetchCartList())
+    // dispatch(fetchOrderList())
+    // dispatch(fetchCartList())
     // localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems))
 }
 

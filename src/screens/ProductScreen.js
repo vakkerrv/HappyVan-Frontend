@@ -1,20 +1,24 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 
-import { Row, Col, Container, Image } from 'react-bootstrap';
+import { Row, Col, Container, Image, Button } from 'react-bootstrap';
 
 import { detailProduct } from '../actions/productActions'
+import { addToCart } from '../actions/cartActions'
 
 const ProductScreen = ({ match, history }) => {
 	const dispatch = useDispatch()
 	const productDetail = useSelector(state => state.product)
 	const { product } = productDetail
 
-	console.log('product', product)
-
 	useEffect(() => {
 		dispatch(detailProduct(match.params.id))
 	}, [dispatch, match])
+
+    const addToCartHandler = (id) => {
+        dispatch(addToCart(id))
+    }
 
 	return(
 		<Container>
@@ -29,12 +33,20 @@ const ProductScreen = ({ match, history }) => {
 				</Col>
 
 				<Col md={6}>
+					<Link to='/catalog' className='btn btn-light my-3'>Вернуться к каталогу</Link>
 					<h1>{product.name}</h1>
 
 					<div>
 						Price: {product.price} rubles
 					</div>
 
+					<Button 
+						onClick = {() => addToCartHandler(product.id)} 
+						variant="primary" block
+						className='col-4 m-auto'
+					>
+						В корзину
+					</Button>
 					
 				</Col>
 

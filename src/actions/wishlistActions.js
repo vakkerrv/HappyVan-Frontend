@@ -7,7 +7,11 @@ import {
     WISHLIST_FAIL,
     WISHLIST_ADD_ITEM,
     WISHLIST_REMOVE_ITEM,
-    UNAUT_WISHLIST,
+    // UNAUT_WISHLIST,
+
+    WISHLIST_ADD_ITEM_REQUEST,
+    WISHLIST_ADD_ITEM_SUCCESS,
+    WISHLIST_ADD_ITEM_FAIL,
 
 } from '../constants/wishlistConstants'
 
@@ -39,47 +43,43 @@ export const fetchWishlist = () => async (dispatch, getState) => {
 
 export const addToWishlist = (item_id) => async (dispatch, getState) => {
 
-    const { userInfo } = getState().userLogin
+    try{
+        dispatch({ type: WISHLIST_ADD_ITEM_REQUEST })
 
-    const currentList = getState().wishlist.wishlistItems
-    const existItem = currentList.find(x => x.item_id.id === item_id)
+        const currentList = getState().wishlist.wishlistItems
+        const existItem = currentList.find(x => x.item_id.id === item_id)
 
-    let data_dispatch = { item_id: {id: item_id} }
-    let id_generated
+        let data_dispatch = { item_id: {id: item_id} }
+        let id_generated
 
-    if (!existItem) {
+        if (!existItem) {
 
-        if (userInfo){
             const body = {
                 item_id: item_id, 
             }
 
-            const { data: {id} } = await api.post(
+            const { data } = await api.post(
                 'wishlist/wish-item/add/',
                 body,
             )
 
-            id_generated = id
+            dispatch({ 
+                type: WISHLIST_ADD_ITEM_SUCCESS, 
+                payload: data,
+            })
 
-        }else{
-            id_generated = uuidv4()
+            dispatch(fetchWishlist())
+
         }
 
-        const { data } = await api.get(
-            `items/${item_id}/`
-            )
-
-        data_dispatch = {
-            id: id_generated,
-            item_id: data
-        }
-    } 
-
-    dispatch({ 
-        type: WISHLIST_ADD_ITEM, 
-        payload: data_dispatch })
-
-    localStorage.setItem('wishlist', JSON.stringify(getState().wishlist.wishlistItems))
+    }catch(error){
+        dispatch({
+            type: WISHLIST_ADD_ITEM_FAIL,
+            payload: error.response && error.response.data.detail
+                ? error.response.data.detail
+                : error.message,
+        })
+    }
 }
 
 

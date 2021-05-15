@@ -8,10 +8,42 @@ import {USER_LOGIN_REQUEST,
 		USER_REGISTER_SUCCESS,
 		USER_REGISTER_FAIL,
 
+		USER_UPDATE_REQUEST,
+		USER_UPDATE_SUCCESS,
+		USER_UPDATE_FAIL,
+
+		USER_ADD_ADDRESS_REQUEST,
 		USER_ADD_ADDRESS_SUCCESS,
 		USER_ADD_ADDRESS_FAIL,
 
+		USER_GET_ADDRESS_REQUEST,
+		USER_GET_ADDRESS_SUCCESS,
+		USER_GET_ADDRESS_FAIL,
+
+		USER_UPDATE_ADDRESS_REQUEST,
+		USER_UPDATE_ADDRESS_SUCCESS,
+		USER_UPDATE_ADDRESS_FAIL,
 	} from '../constants/userConstants'
+
+export const userRegisterReducer = (state={}, action) => {
+	switch(action.type){
+		case USER_REGISTER_REQUEST:
+			return { loading: true }
+
+		case USER_REGISTER_SUCCESS:
+			return { loading: false, userInfo: action.payload }
+
+		case USER_REGISTER_FAIL:
+			return { loading: false, error: action.payload }
+
+        case USER_LOGOUT:
+            return {}
+
+		default:
+			return state
+	}
+    
+};
 
 export const userLoginReducer = (state={}, action) => {
 	switch(action.type){
@@ -29,32 +61,110 @@ export const userLoginReducer = (state={}, action) => {
 
 		default:
 			return state
+	}   
+};
+
+
+export const userUpdateReducer = (state={}, action) => {
+	switch(action.type){
+
+		case USER_UPDATE_REQUEST:
+			return {
+				loading: true,
+			}
+
+        case USER_UPDATE_SUCCESS:
+            return { 
+            	loading: false, 
+            	success: true,
+            }
+
+        case USER_UPDATE_FAIL:
+            return { 
+            	loading: false, 
+            	error: action.payload 
+            }
+
+		default:
+			return state
+	}   
+};
+
+
+export const getAddressReducer = (state={ addressInfo: {} }, action) => {
+	switch(action.type){
+		
+		case USER_GET_ADDRESS_REQUEST:
+			return { 
+				loading: true,
+				addressInfo: {  },
+			}
+
+		case USER_GET_ADDRESS_SUCCESS:
+			return { 
+				loading: false,
+				addressInfo: action.payload,
+			}		
+
+		case USER_GET_ADDRESS_FAIL:
+			return { 
+				loading: false,
+				addressInfo: {  },
+				error: action.payload,
+			}
+
+		default:
+			return state
 	}
     
 };
 
-export const userRegisterReducer = (state={}, action) => {
+export const addAddressReducer = (state={}, action) => {
 	switch(action.type){
-		case USER_REGISTER_REQUEST:
-			return { loading: true }
 
-		case USER_REGISTER_SUCCESS:
-			return { loading: false, userInfo: action.payload }
-
-		case USER_REGISTER_FAIL:
-			return { loading: false, error: action.payload }
-
-        case USER_LOGOUT:
-            return {}
-
-
-
+		case USER_ADD_ADDRESS_REQUEST:
+			return { 
+				loading: true,
+			}
+		
 		case USER_ADD_ADDRESS_SUCCESS:
-			return { success:true, address: action.payload }
+			return { 
+				loading: false,
+				success: false,
+			}
 
 		case USER_ADD_ADDRESS_FAIL:
-			return { success:false, error: action.payload }
+			return { 
+				loading: false,
+				error: action.payload 
+			}
 
+		default:
+			return state
+	}
+    
+};
+
+
+export const updateAddressReducer = (state={}, action) => {
+	switch(action.type){
+
+		case USER_UPDATE_ADDRESS_REQUEST:
+			return { 
+				loading: true,
+			}
+		
+		case USER_UPDATE_ADDRESS_SUCCESS:
+			return { 
+				loading: false,
+				success: false,
+			}
+
+		case USER_UPDATE_ADDRESS_FAIL:
+			return { 
+				loading: false,
+				error: action.payload 
+			}
 
 		default:
 			return state

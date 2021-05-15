@@ -3,7 +3,12 @@ import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
 
 import {
-    userLoginReducer, userRegisterReducer,
+    userLoginReducer, 
+    userUpdateReducer, 
+    getAddressReducer, 
+    addAddressReducer, 
+    updateAddressReducer,
+    userRegisterReducer,
 } from './reducers/userReducers'
 
 import {
@@ -11,11 +16,11 @@ import {
 } from './reducers/productReducers'
 
 import {
-    cartReducer,
+    cartReducer, cartAddItemReducer,
 } from './reducers/cartReducers'
 
 import {
-    wishlistReducer,
+    wishlistReducer, wishlistAddItemReducer,
 } from './reducers/wishlistReducers'
 
 import {
@@ -23,29 +28,46 @@ import {
 } from './reducers/orderReducers'
 
 import {
-    subsReducer,
+    subscribeReducer, subDetailReducer, subUpdateReducer,
 } from './reducers/subsReducers'
 
 import {
-    bagReducer,
+    bagReducer, bagUpdateReducer,
 } from './reducers/bagReducers'
+
+import {
+    tokenReducer,
+} from './reducers/tokenReducer'
 
 import { USER_LOGOUT } from './constants/userConstants'
 
 const appReducer = combineReducers({
-    userLogin: userLoginReducer,
     userRegister: userRegisterReducer,
+    userLogin: userLoginReducer,
+    userUpdate: userUpdateReducer,
+    address: getAddressReducer,
+    addAddress: addAddressReducer,
+    updateAddress: updateAddressReducer,
 
     productList: productListReducer,
     product: productDetailReducer,
 
     bag: bagReducer,
+    bagUpdate: bagUpdateReducer,
+    
     cart: cartReducer,
+    addCart: cartAddItemReducer,
+
     wishlist: wishlistReducer,
+    addWishlist: wishlistAddItemReducer,
 
     order: orderReducer,
 
-    subscription: subsReducer,
+    subscribe: subscribeReducer,
+    subscription: subDetailReducer,
+    subscriptionUpdate: subUpdateReducer,
+
+    token: tokenReducer,
 })
 
 const reducer = (state, action) => {
@@ -58,8 +80,10 @@ const reducer = (state, action) => {
 
 const userInfoFromStorage = localStorage.getItem('userInfo') ?
     JSON.parse(localStorage.getItem('userInfo')) : null
+const addressFromStorage = localStorage.getItem('address') ?
+    JSON.parse(localStorage.getItem('address')) : {}
 const subInfoFromStorage = localStorage.getItem('subInfo') ?
-    JSON.parse(localStorage.getItem('subInfo')) : null
+    JSON.parse(localStorage.getItem('subInfo')) : {}
 const wishlistFromStorage = localStorage.getItem('wishlist') ?
     JSON.parse(localStorage.getItem('wishlist')) : []
 const cartFromStorage = localStorage.getItem('cartItems') ?
@@ -67,6 +91,7 @@ const cartFromStorage = localStorage.getItem('cartItems') ?
 
 const initialState = {
     userLogin: { userInfo: userInfoFromStorage },
+    address: { addressInfo: addressFromStorage},
     subscription: { details: subInfoFromStorage },
     wishlist: { wishlistItems: wishlistFromStorage },
     cart: { cartItems: cartFromStorage },

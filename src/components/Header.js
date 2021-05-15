@@ -1,8 +1,9 @@
-import React, { } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Navbar, Nav, Container, Image, Dropdown } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { withRouter } from 'react-router-dom'
 
 import { logout } from '../actions/userActions'
 
@@ -16,6 +17,52 @@ const Header = ({ history }) => {
         dispatch(logout())
         history.push('/')
     }
+
+    const [currentTokenAmount, setCurrentTokenAmount] = useState(0.0)
+    const [newTokenAmount, setNewTokenAmount] = useState(0.0)
+
+    const cart = useSelector(state => state.cart)
+    const { cartItems } = cart
+
+    const bag = useSelector(state => state.bag)
+    const { bagItems } = bag
+
+    const subscription = useSelector(state => state.subscription)
+    const { details: {sub_plan_id}} = subscription
+    const allowance = sub_plan_id ? sub_plan_id.allowance : 0
+
+    useEffect(() => {
+	    if (cartItems){
+	    	setNewTokenAmount(Number(
+	    		cartItems.reduce(function(acc, item){
+	                return acc + (item.item_id ? Number(item.item_id.price) : 0)
+	            }, 0).toFixed(0))
+			)
+	    }
+
+
+	    if (bagItems){
+	    	setCurrentTokenAmount(Number(
+	    		bagItems.filter(x => !x.to_return).reduce(function(acc, item){
+	                return acc + (item.item_id ? Number(item.item_id.price) : 0)
+	            }, 0).toFixed(0))
+			)
+	    }
+
+	    let totalTokenAmount = Number(newTokenAmount + currentTokenAmount)
+	    let leftTokenAmount = Number(allowance - totalTokenAmount)
+
+	    dispatch({
+	    	type:'TOKEN_CALC',
+	    	payload: {
+	    		currentTokenAmount: currentTokenAmount,
+	    		newTokenAmount: newTokenAmount,
+	    		totalTokenAmount: totalTokenAmount,
+	    		leftTokenAmount: leftTokenAmount,
+	    	}
+	    })
+
+    }, [cartItems, bagItems, currentTokenAmount, newTokenAmount, allowance, dispatch])
 
     return (
         <header>
@@ -42,26 +89,26 @@ const Header = ({ history }) => {
 
 				    <Nav className="navbar-base ml-auto">
 		      
-				      {userInfo ? (
-	  				      <LinkContainer to='/wishlist'>
-					      	<Nav.Link>
-					      		<Container className='navbar-icon'>
+						{userInfo ? (
+						      <LinkContainer to='/wishlist'>
+						  	<Nav.Link>
+						  		<Container className='navbar-icon'>
 							      	<i className="fas fa-heart"></i>
-					      			<p>Избранное</p>
+						  			<p>Избранное</p>
 						      	</Container>
-					      	</Nav.Link>
-					      </LinkContainer>
-					      ) : (void 0)
-				  	  }
+						  	</Nav.Link>
+						  </LinkContainer>
+						  ) : (void 0)
+						  }
   				      
-  				      <LinkContainer to='/cart'>
-				      	<Nav.Link>
-				      		<Container className='navbar-icon'>
+						<LinkContainer to='/cart'>
+							<Nav.Link>
+								<Container className='navbar-icon'>
 						      	<i className="fas fa-shopping-cart"></i>
 						     	<p>Коризна</p>
-					      	</Container>
-				      	</Nav.Link>
-				      </LinkContainer>
+						  	</Container>
+							</Nav.Link>
+						</LinkContainer>
 			      
 
                         {userInfo ? (
@@ -101,4 +148,4 @@ const Header = ({ history }) => {
     );
 };
 
-export default Header;
+export default withRouter(Header);

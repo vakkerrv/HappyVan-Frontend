@@ -1,24 +1,22 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux'
 import { Row, Col, Image, Button } from 'react-bootstrap';
 
 import { returnItem } from '../actions/bagActions'
-
-import { BAG_STATUS_TO_RETURN, BAG_STATUS_ACTIVE } from '../constants/bagConstants'
-
 
 const BagItem = ({item, id, status}) => {
     const [returnStatus, setReturnStatus] = useState(status)
 
     const dispatch = useDispatch()
 
-    const returnItemHandler = (id) => {
-        if(returnStatus === BAG_STATUS_ACTIVE){
-            dispatch(returnItem(id, BAG_STATUS_TO_RETURN))
-        }else{
-            dispatch(returnItem(id, BAG_STATUS_ACTIVE))
-        }
+    const returnItemHandler = () => {
+        setReturnStatus(prev => !prev)
     }
+
+    useEffect(() => {
+        dispatch(returnItem(id, returnStatus))
+    }, [returnStatus])
+
 
     return (
 
@@ -45,7 +43,7 @@ const BagItem = ({item, id, status}) => {
                         <Button
                                 type='button'
                                 variant='white'
-                                onClick={() => returnItemHandler(id)}
+                                onClick={() => returnItemHandler()}
                             >
                                 <i className='fas fa-undo-alt'></i>
                             </Button>

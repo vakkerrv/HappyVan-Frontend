@@ -2,35 +2,30 @@ import React, { useState, useEffect } from 'react'
 import { Container, Form, Button, Table, ToggleButtonGroup, ToggleButton } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { subscribe } from '../actions/subsActions'
-
 const SelectPlanScreen = ({ history }) => {
     const dispatch = useDispatch()
 
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
 
-    const subscription = useSelector(state => state.subscription)
-    const { details } = subscription
+    const address = useSelector(state => state.address)
+    const { addressInfo } = address
 
     useEffect(() => {
         if (!userInfo) {
-            history.push('/login')
+            // history.push('/login')
         }
     }, [dispatch, history, userInfo])
 
     const [subscriptionPlan, setSubscriptionPlan] = useState(2)
-
-    const SubscribeHandler = (e) => {
+    const submitPlanHandler = (e) => {
         e.preventDefault()
-        if(!details){
-            dispatch(subscribe(subscriptionPlan))
-            history.push('/register/address')
-        }
-    }
 
-    const submitPlanHandler = (plan_id) => {
-        console.log('plan submitted')
+        if(!addressInfo.id){
+            history.push(`/register/address/plan-${subscriptionPlan}`)
+        }else{
+            history.push(`/sub_payment/plan-${subscriptionPlan}`)
+        }
     }
 
     const plansInfo = [
@@ -105,7 +100,7 @@ const SelectPlanScreen = ({ history }) => {
             <div className='d-grid gap-2 col-6 mx-auto'>
                 <Button 
                     id = 'submit-plan'
-                    onClick = {SubscribeHandler} 
+                    onClick = {submitPlanHandler} 
                 >
                     Продолжить
                 </Button>

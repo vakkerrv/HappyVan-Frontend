@@ -9,44 +9,44 @@ const SubscriptionTab = ({ history }) => {
     const dispatch = useDispatch()
 
     const subscription = useSelector(state => state.subscription)
-    const { details } = subscription
+    const { details: subDetails } = subscription
 
     useEffect(() => {
-    	if(details){     		
-        	dispatch(getSubscriptionDetail())
-    	}
-    }, [dispatch, history])
+    	dispatch(getSubscriptionDetail())
+    }, [history])
 
     const SubscribeHandler = (e) => {
         e.preventDefault()
-        if(!details){
+        if(!subDetails.id){
         	history.push('/register/plan')
         }
     }
 
     const UnsubscribeHandler = (e) => {
         e.preventDefault()
-        if(details){
-            dispatch(unsubscribe(details.id))
+        if(subDetails.id){
+            dispatch(unsubscribe(subDetails.id))
         }
     }
 
-    let subInfo = []
-    if (details){
-	    const subDetails = details.sub_plan_id
-	    subInfo = [
-			{key: 'Тип', value: subDetails.id},
-	    	{key: 'Всего токенов', value: subDetails.allowance},
-	    	{key: 'Доступно токенов', value: 1000},
-	    	{key: 'Использовано токенов', value: 4000},
-	    	{key: 'Стоимость подписки', value:  parseFloat(subDetails.price).toFixed(0)},
-	    	]
+    const changeSubscriptionHandler = (e) => {
+        e.preventDefault()
+        history.push('/register/plan')
     }
+
+    const subPlanInfo = subDetails.sub_plan_id
+	const subInfo = [
+		{key: 'Тип', value: subPlanInfo ? subPlanInfo.id : ''},
+    	{key: 'Всего токенов', value: subPlanInfo ? subPlanInfo.allowance : 0},
+    	{key: 'Доступно токенов', value: 1000},
+    	{key: 'Использовано токенов', value: 4000},
+    	{key: 'Стоимость подписки', value:  parseFloat(subPlanInfo ? subPlanInfo.price : 0).toFixed(0)},
+	]
     
 	return(
 		<div className='settings-block pb-2'>
 			
-			{!details ? (
+			{!subDetails.id ? (
 				<Row>
 		            <Col md={9} className='py-2'>
 		            	Подписка не оформлена
@@ -79,7 +79,10 @@ const SubscriptionTab = ({ history }) => {
 		            </Col>
 		            
 		            <Col md={3} className='py-2 px-4'>
-		                <Button className='my-2'>
+		                <Button 
+		                	className='my-2'
+		                	onClick={changeSubscriptionHandler}
+		                >
 		                	Изменить
 		                </Button>
 		                <Button 

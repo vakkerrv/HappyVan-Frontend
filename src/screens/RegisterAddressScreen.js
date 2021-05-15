@@ -7,16 +7,17 @@ import 'react-dadata/dist/react-dadata.css';
 
 import { addAddress } from '../actions/userActions'
 
-const RegisterAddressScreen = ({history}) => {
-    
+const RegisterAddressScreen = ({history, match}) => {
+    const subPlanId = match.params.planId
+
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
 
-    useEffect(() => {
-        if (!userInfo) {
-            history.push('/')
-        }
-    }, [history, userInfo])
+    // useEffect(() => {
+    //     if (!userInfo) {
+    //         history.push('/')
+    //     }
+    // }, [history, userInfo])
 
 
 
@@ -125,7 +126,7 @@ const RegisterAddressScreen = ({history}) => {
         }
 
         dispatch(addAddress(address_data))
-        history.push('/register/payment')
+        history.push(`/sub_payment/plan-${subPlanId}`)
     }
 
     return (
