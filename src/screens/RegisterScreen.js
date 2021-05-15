@@ -93,14 +93,14 @@ const RegisterScreen = ({ location, history }) => {
         },
         {
             controlId: 'password', 
-            type: 'text', 
+            type: 'password', 
             placeholder: 'Пароль', 
             method: (e) => setPassword(e.target.value),
             required: true,
         },
         {
             controlId: 'password2', 
-            type: 'text', 
+            type: 'password', 
             placeholder: 'Подтвердите пароль', 
             method: (e) => setPassword2(e.target.value),
             required: true,
@@ -122,7 +122,6 @@ const RegisterScreen = ({ location, history }) => {
                                 <Form.Control
                                     type={listValue.type}
                                     placeholder={listValue.placeholder}
-                                    // value={1}
                                     onChange={listValue.method}
                                     required={listValue.required}
                                 >
@@ -135,80 +134,6 @@ const RegisterScreen = ({ location, history }) => {
                 </Col>
 
             </Row>
-            {/*<Row>
-            	<Col md={4}>
-            		<Form.Group controlId='username' className='form-floating my-form-floating'>
-                        <Form.Control
-                            type='text'
-                            placeholder='Username'
-                            // value={1}
-                            onChange={(e) => setUsername(e.target.value)}
-                            required
-                        >
-                        </Form.Control>
-                        <Form.Label>Username</Form.Label>
-                    </Form.Group>
-            	</Col>
-            </Row>
-                
-            <Row>
-                <Col md={4}>   
-
-                    <Form.Group controlId='firstName' className='form-floating my-form-floating'>
-                        <Form.Control
-                            type='text'
-                            placeholder='placeholder'
-                            // value={1}
-                            // onChange={(e) => setUsername(e.target.value)}
-                        >
-                        </Form.Control>
-                        <Form.Label>First Name</Form.Label>
-                    </Form.Group>
-                </Col>
-
-                <Col md={4}>
-                    <Form.Group controlId='lastName' className='form-floating my-form-floating'>
-                        <Form.Control
-                            type='text'
-                            placeholder='Last Name'
-                            // value={1}
-                            // onChange={(e) => setUsername(e.target.value)}
-                        >
-                        </Form.Control>
-                        <Form.Label>Last Name</Form.Label>
-                    </Form.Group>
-                </Col>
-            </Row>
-                        
-            <Row>
-            	<Col md={4}> 
-	                <Form.Group controlId='password' className='form-floating my-form-floating'>
-	                    <Form.Control
-	                        type='password'
-	                        placeholder='Password'
-	                        // value={1}
-	                        onChange={(e) => setPassword(e.target.value)}
-	                        required
-	                    >
-	                    </Form.Control>
-	                    <Form.Label>Password</Form.Label>
-	                </Form.Group>
-                </Col>
-
-                <Col md={4}>
-	                <Form.Group controlId='password2' className='form-floating my-form-floating'>
-	                    <Form.Control
-	                        type='password'
-	                        placeholder='Password'
-	                        // value={1}
-	                        onChange={(e) => setPassword2(e.target.value)}
-	                        required
-	                    >
-	                    </Form.Control>
-	                    <Form.Label>Confirm Password</Form.Label>
-	                </Form.Group>
-                </Col>
-            </Row>*/}
 
             <Button type='submit' variant='primary' className='my-1'>
                 Зарегистрироваться

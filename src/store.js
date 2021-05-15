@@ -24,7 +24,7 @@ import {
 } from './reducers/wishlistReducers'
 
 import {
-    orderReducer,
+    orderReducer, orderCreateReducer,
 } from './reducers/orderReducers'
 
 import {
@@ -62,6 +62,7 @@ const appReducer = combineReducers({
     addWishlist: wishlistAddItemReducer,
 
     order: orderReducer,
+    orderCreate: orderCreateReducer,
 
     subscribe: subscribeReducer,
     subscription: subDetailReducer,

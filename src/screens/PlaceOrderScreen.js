@@ -3,8 +3,9 @@ import { Container, Button, Row, Col, ListGroup, Image, Card, Form } from 'react
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
-// import { createOrder } from '../actions/orderActions'
+import { createOrder } from '../actions/orderActions'
 // import { ORDER_CREATE_RESET } from '../constants/orderConstants'
+
 import CartItem from '../components/CartItem'
 
 import { fetchCartList } from '../actions/cartActions'
@@ -27,6 +28,9 @@ function PlaceOrderScreen({ history }) {
     const cart = useSelector(state => state.cart)
     const { cartItems } = cart
 
+    const orderCreate = useSelector(state => state.orderCreate)
+    const { order, error, success: orderCreateSuccess } = orderCreate
+
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -36,43 +40,20 @@ function PlaceOrderScreen({ history }) {
         if (bagItems.length === 0  && userInfo){
             dispatch(fetchBagList())
         }
+
+        if (orderCreateSuccess){
+            history.push('/order_payment')
+        }
     }, [userInfo, dispatch])
 
-    // const orderCreate = useSelector(state => state.orderCreate)
-    // const { order, error, success } = orderCreate
-
-    // const dispatch = useDispatch()
-
-    // const cart = useSelector(state => state.cart)
-
-    // cart.itemsPrice = cart.cartItems.reduce((acc, item) => acc + item.price * item.qty, 0).toFixed(2)
-    // cart.shippingPrice = (cart.itemsPrice > 100 ? 0 : 10).toFixed(2)
-    // cart.taxPrice = Number((0.082) * cart.itemsPrice).toFixed(2)
-
-    // cart.totalPrice = (Number(cart.itemsPrice) + Number(cart.shippingPrice) + Number(cart.taxPrice)).toFixed(2)
-
-
-    // if (!cart.paymentMethod) {
-    //     history.push('/payment')
-    // }
-
-    // useEffect(() => {
-    //     if (success) {
-    //         history.push(`/order/${order._id}`)
-    //         dispatch({ type: ORDER_CREATE_RESET })
-    //     }
-    // }, [success, history])
-
-    const placeOrder = () => {
-        // dispatch(createOrder({
-        //     orderItems: cart.cartItems,
-        //     shippingAddress: cart.shippingAddress,
-        //     paymentMethod: cart.paymentMethod,
-        //     itemsPrice: cart.itemsPrice,
-        //     shippingPrice: cart.shippingPrice,
-        //     taxPrice: cart.taxPrice,
-        //     totalPrice: cart.totalPrice,
-        // }))
+    const placeOrder = (e) => {
+        e.preventDefault()
+        dispatch(createOrder({
+            delivery_option: 'standard',
+            delivery_date: 2,
+            delivery_time_from: 5, 
+            delivery_time_to: 6,
+        }))
     }
 
     return (
