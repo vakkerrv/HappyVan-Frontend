@@ -5,6 +5,8 @@ import { withRouter } from 'react-router-dom'
 
 import { subscribe, updateSubscription } from '../actions/subsActions'
 
+import RegisterSteps from '../components/RegisterSteps'
+
 const SubscriptionPaymentScreen = ({ history,match }) => {
     const subPlanId = match.params.id
 
@@ -33,7 +35,9 @@ const SubscriptionPaymentScreen = ({ history,match }) => {
 
     return (
     	<Container className='d-flex flex-column justify-content-center'>
-			<h1 className='text-center'>Оплата подписки</h1>
+			<RegisterSteps step1 step2 step3 step4/>
+
+            <h1 className='text-center'>Оплата подписки</h1>
 
 			<Button className='btn btn-primary col-4 mx-auto'
 				onClick={SubscriptionPayHandler}

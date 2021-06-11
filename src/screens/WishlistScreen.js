@@ -14,12 +14,16 @@ const WishlistScreen = (  ) => {
     const wishlist = useSelector(state => state.wishlist)
     const { wishlistItems } = wishlist
 
+    // useEffect(() => {
+    //     if (userInfo && wishlistItems===0){
+    //         dispatch(fetchWishlist())
+    //     }
+    // }, [userInfo, dispatch])
+    
     useEffect(() => {
-        if (userInfo && wishlistItems===0){
-            dispatch(fetchWishlist())
-        }
+        dispatch(fetchWishlist())
     }, [userInfo, dispatch])
-
+    
     return (
         <Container>
         	<h1>Избранное</h1>
@@ -33,7 +37,7 @@ const WishlistScreen = (  ) => {
                             <Container>
                                     
                                     <ListGroup variant='flush'>
-                                        {wishlistItems.map(item => (
+                                        {wishlistItems.filter(x=>x.item_id).map(item => (
                                             <ListGroup.Item key={item.id}>
                                                 <WishItem item_details = {item.item_id} id = {item.id}/>
                                             </ListGroup.Item>

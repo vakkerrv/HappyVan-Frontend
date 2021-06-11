@@ -1,13 +1,13 @@
 import React from 'react'
-import { Row, Col, Table } from 'react-bootstrap'
+import { Container, Row, Col } from 'react-bootstrap'
 
 function AccountSettingsView({ header, content, button }) {
     return (
+		<Container pb-2>
+			<h2 className='mb-3'>
+				{header}
+			</h2>
 			<Row>
-				<h2 className='mb-3'>
-					{header}
-				</h2>
-
 				<Col md={9} className='py-2'>
 	                {content}
 	            </Col>
@@ -16,6 +16,7 @@ function AccountSettingsView({ header, content, button }) {
 	                {button}
 	            </Col>            
 	        </Row>
+        </Container>
     )
 }
 

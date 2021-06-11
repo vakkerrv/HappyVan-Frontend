@@ -7,10 +7,13 @@ import { useDispatch, useSelector } from 'react-redux'
 import { register } from '../actions/userActions'
 import { addListToCart } from '../actions/cartActions'
 
+import RegisterSteps from '../components/RegisterSteps'
+
 const RegisterScreen = ({ location, history }) => {
     const [username, setUsername] = useState('')
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
+    const [email, setEmail] = useState('')
     const [phone, setPhone] = useState('')
     const [password, setPassword] = useState('')
     const [password2, setPassword2] = useState('')
@@ -39,13 +42,15 @@ const RegisterScreen = ({ location, history }) => {
         e.preventDefault()
         const user_register_data = {
         	'username': username,
+            'email': email,
         	'first_name': firstName,
         	'last_name': lastName,
         	'password': password,
-            'user_ext': {
-                phone: phone,
-                registration_step: 1,
-            }
+            phone: phone,
+            // 'user_ext': {
+            //     phone: phone,
+            //     registration_step: 1,
+            // }
         }
 
         if (password !== password2) {
@@ -71,25 +76,33 @@ const RegisterScreen = ({ location, history }) => {
             required: true,
         },
         {
+            controlId: 'email', 
+            type: 'email', 
+            placeholder: 'Email', 
+            method: (e) => setEmail(e.target.value),
+            required: false,
+        },
+
+        {
             controlId: 'firstName', 
             type: 'text', 
             placeholder: 'Имя', 
             method: (e) => setFirstName(e.target.value),
-            required: true,
+            required: false,
         },
         {
             controlId: 'lastName', 
             type: 'text', 
             placeholder: 'Фамилия', 
             method: (e) => setLastName(e.target.value),
-            required: true,
+            required: false,
         },
         {
             controlId: 'phone', 
             type: 'text', 
             placeholder: 'Телефонный номер', 
             method: (e) => setPhone(e.target.value),
-            required: true,
+            required: false,
         },
         {
             controlId: 'password', 
@@ -109,7 +122,10 @@ const RegisterScreen = ({ location, history }) => {
 
     return (
         <Container>
-            <h1>Sign In</h1>
+
+            <RegisterSteps step1/>
+
+            <h1>Создайте аккаунт</h1>
             {message && <Alert variant='danger'>{message}</Alert>}
 
             <Form onSubmit={registerHandler}>

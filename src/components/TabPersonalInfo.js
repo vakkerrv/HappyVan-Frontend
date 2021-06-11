@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, Fragment } from 'react'
+import { Link } from 'react-router-dom'
+
 import { Button, Table, Form } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -43,63 +45,67 @@ const TabPersonalInfo = () => {
         setPersonalChangeState(false)
     }
 
-	return(
-		<div className='settings-block pb-2'>
-		
-	        <AccountSettingsView
-	        	header = 'Персональная информация' 
-	        	button = {
-	        		personalChangeState ? (
-			        		<Button type='submit' form='form-personal-info'>
-			                	Сохранить
-			                </Button>
-	        			) : 
-	        			(
-			        		<Button onClick={()=>setPersonalChangeState(prev => !prev)} as='div'>
-			                	Изменить
-			                </Button>
-	        			)
+	return(	
+        <AccountSettingsView
+        	header = 'Персональная информация' 
+        	button = {
+        		personalChangeState ? (
+		        		<Button type='submit' form='form-personal-info'>
+		                	Сохранить
+		                </Button>
+        			) : 
+        			(
+		        		<Fragment>
+                            <Button onClick={()=>setPersonalChangeState(prev => !prev)} as='div'>
+    		                	Изменить
+    		                </Button>
 
-	        	}
-	        	content = {
-	        		personalChangeState ? (
-    			            <Form id='form-personal-info' onSubmit={updatePersonalInfoHandler}>
-    			            	{personalInfo.map((listValue, index) => {
-    			            		return (
-    			            			<Form.Group key={index} className='form-floating my-form-floating'>
-					                        <Form.Control
-					                            type={listValue.type}
-					                            placeholder={listValue.key}
-					                            value={listValue.value}
-					                            onChange={listValue.onChange}
-					                            required={listValue.required}
-					                        >
-					                        </Form.Control>
-					                        <Form.Label>{listValue.key}</Form.Label>
-					                    </Form.Group>
-    			            			)
-    			            	})}
-                            </Form>
-	        			) : (
-	        				<Table borderless size="sm" className='info-table'>
-								  <tbody>
-								  	{personalInfo.map(( listValue, index) => {
-							  			return (
-								  			<tr key={index}>
-										      <td>{listValue.key}</td>
-										      <td>{listValue.value}</td>
-										    </tr>
-							  				)
-							  			}
-							  		)}
-								  </tbody>
-							</Table>
-	        			)
-		        }
+                            <Link to={'/set_password'}>
+                                <Button type='button' variant='secondary' className='my-1'>
+                                    Изменить пароль
+                                </Button>
+                            </Link>
+                        </Fragment>
+        			)
 
-        	/>
+        	}
+        	content = {
+        		personalChangeState ? (
+			            <Form id='form-personal-info' onSubmit={updatePersonalInfoHandler}>
+			            	{personalInfo.map((listValue, index) => {
+			            		return (
+			            			<Form.Group key={index} className='form-floating my-form-floating'>
+				                        <Form.Control
+				                            type={listValue.type}
+				                            placeholder={listValue.key}
+				                            value={listValue.value}
+				                            onChange={listValue.onChange}
+				                            required={listValue.required}
+				                        >
+				                        </Form.Control>
+				                        <Form.Label>{listValue.key}</Form.Label>
+				                    </Form.Group>
+			            			)
+			            	})}
+                        </Form>
+        			) : (
+        				<Table borderless size="sm" className='info-table'>
+							  <tbody>
+							  	{personalInfo.map(( listValue, index) => {
+						  			return (
+							  			<tr key={index}>
+									      <td>{listValue.key}</td>
+									      <td>{listValue.value}</td>
+									    </tr>
+						  				)
+						  			}
+						  		)}
+							  </tbody>
+						</Table>
+        			)
+	        }
 
-        </div>
+    	/>
 	)
 
 }

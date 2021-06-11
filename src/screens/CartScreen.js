@@ -31,17 +31,19 @@ const CartScreen = (  ) => {
     const { cartItems } = cart
 
     useEffect(() => {
-        if (userInfo && cartItems.length===0) {
+        // if (userInfo && cartItems.length===0) {
+        if (userInfo) {
             dispatch(fetchCartList()) 
         }
-        if (subDetails.id && bagItems.length===0){
+        // if (subDetails.id && bagItems.length===0){
+        if (subDetails.id){
             dispatch(fetchBagList())
         }
     }, [userInfo, subDetails, dispatch])
 
-    const createOrderHandler = () => {
-        dispatch(createOrder())
-    }
+    // const createOrderHandler = () => {
+    //     dispatch(createOrder())
+    // }
 
     const nextStepObj = {}
     if (userInfo && subDetails.id && addressInfo.id){
@@ -72,7 +74,7 @@ const CartScreen = (  ) => {
                             <Container id='cart-container'>
                                     
                                 <ListGroup variant='flush'>
-                                    {cartItems.map(item => (
+                                    {cartItems.filter(x => x.item_id).map(item => (
                                         <ListGroup.Item key={item.id}>
                                             <CartItem item = {item.item_id} id = {item.id}/>
                                         </ListGroup.Item>
@@ -95,7 +97,7 @@ const CartScreen = (  ) => {
                                 <Container id='cart-container'>
 
                                     <ListGroup variant='flush'>
-                                        {bagItems.map(item => (
+                                        {bagItems.filter(x => x.item_id).map(item => (
                                             <ListGroup.Item 
                                                 key={item.id} 
                                                 className={item.to_return ? 'bag-item-return' : 'bag-item-active'}

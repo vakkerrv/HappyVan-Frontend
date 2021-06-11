@@ -23,6 +23,17 @@ import {USER_LOGIN_REQUEST,
 		USER_UPDATE_ADDRESS_REQUEST,
 		USER_UPDATE_ADDRESS_SUCCESS,
 		USER_UPDATE_ADDRESS_FAIL,
+
+		PASSWORD_RESET_REQUEST,
+		PASSWORD_RESET_SUCCESS,
+		PASSWORD_RESET_FAIL,
+		PASSWORD_RESET_CONFIRM_REQUEST,
+		PASSWORD_RESET_CONFIRM_SUCCESS,
+		PASSWORD_RESET_CONFIRM_FAIL,
+
+		SET_PASSWORD_REQUEST,
+		SET_PASSWORD_SUCCESS,
+		SET_PASSWORD_FAIL,
 	} from '../constants/userConstants'
 
 export const userRegisterReducer = (state={}, action) => {
@@ -83,6 +94,61 @@ export const userUpdateReducer = (state={}, action) => {
             return { 
             	loading: false, 
             	error: action.payload 
+            }
+
+		default:
+			return state
+	}   
+};
+
+
+export const passwordResetReducer = (state={}, action) => {
+	switch(action.type){
+
+		case PASSWORD_RESET_REQUEST:
+			return {state}
+
+        case PASSWORD_RESET_SUCCESS:
+            return { 
+            	...state,
+            	successReset: true,
+            }
+
+        case PASSWORD_RESET_FAIL:
+            return { 
+            	...state,
+            	errorReset: action.payload
+            }
+
+		case PASSWORD_RESET_CONFIRM_REQUEST:
+			return {state}
+
+        case PASSWORD_RESET_CONFIRM_SUCCESS:
+            return { 
+				...state,
+            	successConfirm: true,
+            }
+
+        case PASSWORD_RESET_CONFIRM_FAIL:
+            return { 
+				...state,
+            	errorConfirm: action.payload 
+            }
+
+
+		case SET_PASSWORD_REQUEST:
+			return {state}
+
+        case SET_PASSWORD_SUCCESS:
+            return { 
+				...state,
+            	successSet: true,
+            }
+
+        case SET_PASSWORD_FAIL:
+            return { 
+				...state,
+            	errorSet: action.payload 
             }
 
 		default:

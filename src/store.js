@@ -9,6 +9,7 @@ import {
     addAddressReducer, 
     updateAddressReducer,
     userRegisterReducer,
+    passwordResetReducer,
 } from './reducers/userReducers'
 
 import {
@@ -24,7 +25,11 @@ import {
 } from './reducers/wishlistReducers'
 
 import {
-    orderReducer, orderCreateReducer,
+    waitlistReducer, waitlistAddItemReducer,
+} from './reducers/waitlistReducers'
+
+import {
+    orderDetailsReducer, orderCreateReducer, orderPayReducer,
 } from './reducers/orderReducers'
 
 import {
@@ -39,12 +44,17 @@ import {
     tokenReducer,
 } from './reducers/tokenReducer'
 
+import {
+    scrollReducer,
+} from './reducers/scrollReducers'
+
 import { USER_LOGOUT } from './constants/userConstants'
 
 const appReducer = combineReducers({
     userRegister: userRegisterReducer,
     userLogin: userLoginReducer,
     userUpdate: userUpdateReducer,
+    passwordReset: passwordResetReducer,
     address: getAddressReducer,
     addAddress: addAddressReducer,
     updateAddress: updateAddressReducer,
@@ -61,14 +71,20 @@ const appReducer = combineReducers({
     wishlist: wishlistReducer,
     addWishlist: wishlistAddItemReducer,
 
-    order: orderReducer,
+    waitlist: waitlistReducer,
+    addWaitlist: waitlistAddItemReducer,
+
+    orderDetails: orderDetailsReducer,
     orderCreate: orderCreateReducer,
+    orderPay: orderPayReducer,
 
     subscribe: subscribeReducer,
     subscription: subDetailReducer,
     subscriptionUpdate: subUpdateReducer,
 
     token: tokenReducer,
+
+    scroll: scrollReducer,
 })
 
 const reducer = (state, action) => {
@@ -85,8 +101,10 @@ const addressFromStorage = localStorage.getItem('address') ?
     JSON.parse(localStorage.getItem('address')) : {}
 const subInfoFromStorage = localStorage.getItem('subInfo') ?
     JSON.parse(localStorage.getItem('subInfo')) : {}
-const wishlistFromStorage = localStorage.getItem('wishlist') ?
-    JSON.parse(localStorage.getItem('wishlist')) : []
+// const wishlistFromStorage = localStorage.getItem('wishlist') ?
+//     JSON.parse(localStorage.getItem('wishlist')) : []
+const waitlistFromStorage = localStorage.getItem('waitlist') ?
+    JSON.parse(localStorage.getItem('waitlist')) : []
 const cartFromStorage = localStorage.getItem('cartItems') ?
     JSON.parse(localStorage.getItem('cartItems')) : []
 
@@ -94,7 +112,8 @@ const initialState = {
     userLogin: { userInfo: userInfoFromStorage },
     address: { addressInfo: addressFromStorage},
     subscription: { details: subInfoFromStorage },
-    wishlist: { wishlistItems: wishlistFromStorage },
+    // wishlist: { wishlistItems: wishlistFromStorage },
+    waitlist: { waitlistItems: waitlistFromStorage },
     cart: { cartItems: cartFromStorage },
 }
 

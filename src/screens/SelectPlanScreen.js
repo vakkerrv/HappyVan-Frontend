@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { Container, Form, Button, Table, ToggleButtonGroup, ToggleButton } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 
+import RegisterSteps from '../components/RegisterSteps'
+
 const SelectPlanScreen = ({ history }) => {
     const dispatch = useDispatch()
 
@@ -65,6 +67,8 @@ const SelectPlanScreen = ({ history }) => {
 
     return (
         <Container>
+            <RegisterSteps step1 step2/>
+
             <h1>Выберите подходящий план</h1>
             {/*{message && <Alert variant='danger'>{message}</Alert>}*/}
 

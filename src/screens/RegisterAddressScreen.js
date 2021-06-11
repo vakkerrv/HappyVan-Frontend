@@ -6,6 +6,7 @@ import { AddressSuggestions } from 'react-dadata/dist/esm/AddressSuggestions';
 import 'react-dadata/dist/react-dadata.css';
 
 import { addAddress } from '../actions/userActions'
+import RegisterSteps from '../components/RegisterSteps'
 
 const RegisterAddressScreen = ({history, match}) => {
     const subPlanId = match.params.planId
@@ -131,11 +132,12 @@ const RegisterAddressScreen = ({history, match}) => {
 
     return (
         <Container className ="address">
+            <RegisterSteps step1 step2 step3/>
 
             <Row>
                 <Form onSubmit={addressSubmitHandler}>
 
-                    <Col md={4}>
+                    <Col md={8}>
                         <h1>Укажите адрес доставки</h1>
                         
                         {inputParams.map(( listValue, index ) => {

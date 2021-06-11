@@ -1,4 +1,4 @@
-import React, {  } from 'react';
+import React, { Fragment } from 'react';
 import { useDispatch } from 'react-redux'
 import { Row, Col, Image, Button } from 'react-bootstrap';
 
@@ -11,8 +11,8 @@ const WishItem = ({item_details, id}) => {
         dispatch(removeFromWishlist(id))
     }
 
+    console.log('item_details', item_details)
     return (
-
         <Row>
             <Col md={3}>
                 {item_details.image ? (

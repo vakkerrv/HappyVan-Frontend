@@ -23,6 +23,18 @@ import {USER_LOGIN_REQUEST,
 		USER_UPDATE_ADDRESS_REQUEST,
 		USER_UPDATE_ADDRESS_SUCCESS,
 		USER_UPDATE_ADDRESS_FAIL,
+
+		PASSWORD_RESET_REQUEST,
+		PASSWORD_RESET_SUCCESS,
+		PASSWORD_RESET_FAIL,
+		PASSWORD_RESET_CONFIRM_REQUEST,
+		PASSWORD_RESET_CONFIRM_SUCCESS,
+		PASSWORD_RESET_CONFIRM_FAIL,
+
+		SET_PASSWORD_REQUEST,
+		SET_PASSWORD_SUCCESS,
+		SET_PASSWORD_FAIL,
+
 	} from '../constants/userConstants';
 
 import { getSubscriptionDetail } from './subsActions'
@@ -30,14 +42,14 @@ import { fetchBagList } from '../actions/bagActions'
 import { fetchCartList, addListToCart } from '../actions/cartActions'
 import { fetchWishlist } from '../actions/wishlistActions'
 
-export const login = (username, password) => async(dispatch) => {
+export const login = (email, password) => async(dispatch) => {
 	try{
 		dispatch({
 			type: USER_LOGIN_REQUEST
 		})
 
 		const { data } = await api.login(
-			{ username: username, password: password },
+			{ email: email, password: password },
 			)
 
 		dispatch({
@@ -93,13 +105,10 @@ export const register = (output) => async(dispatch, getState) => {
 			payload: data,
 		})
 
-        // dispatch(login(output.username, output.password))
-
         // Save a cart of non-authorized user 
 	    const { cartItems } = getState().cart
-     //    dispatch(addListToCart(cartItems.map(x => x.item_id.id)))
 
-        Promise.resolve(dispatch(login(output.username, output.password))).then(function (response) {
+        Promise.resolve(dispatch(login(output.email, output.password))).then(function (response) {
           	dispatch(addListToCart(cartItems.map(x => x.item_id.id))); //dispatch
             return response;
         })
@@ -114,6 +123,98 @@ export const register = (output) => async(dispatch, getState) => {
 	}
 }
 
+
+export const resetPassword = (email) => async(dispatch) => {
+	try{
+		dispatch({
+			type: PASSWORD_RESET_REQUEST
+		})
+
+		await api.post(
+			'accounts/auth/users/reset_password/',
+			{email: email}
+			)
+
+		dispatch({
+			type: PASSWORD_RESET_SUCCESS,
+		})
+
+	}catch(error) {
+		dispatch({
+			type: PASSWORD_RESET_FAIL,
+			payload: error.response && error.response.data.detail
+			? error.response.data.detail
+			: error.message,
+		})
+	}
+}
+
+
+export const resetPasswordConfirm = (uid, token, newPassword, reNewPassword) => async(dispatch) => {
+	try{
+		dispatch({
+			type: PASSWORD_RESET_CONFIRM_REQUEST
+		})
+
+		const body = { 
+			uid: uid, 
+			token: token, 
+			new_password: newPassword, 
+			re_new_password: reNewPassword,
+		}
+
+		await api.post(
+			'accounts/auth/users/reset_password_confirm/',
+			body
+			)
+
+		dispatch({
+			type: PASSWORD_RESET_CONFIRM_SUCCESS,
+		})
+
+	}catch(error) {
+		dispatch({
+			type: PASSWORD_RESET_CONFIRM_FAIL,
+			payload: error.response && error.response.data.detail
+			? error.response.data.detail
+			: error.message,
+		})
+	}
+}
+
+
+export const setPassword = (newPassword, reNewPassword, currentPassword) => async(dispatch) => {
+	try{
+		dispatch({
+			type: SET_PASSWORD_REQUEST
+		})
+
+		const body = { 
+			new_password: newPassword, 
+			re_new_password: reNewPassword,
+			current_password: currentPassword,
+		}
+
+		await api.post(
+			'accounts/auth/users/set_password/',
+			body
+			)
+
+		dispatch({
+			type: SET_PASSWORD_SUCCESS,
+		})
+
+	}catch(error) {
+		dispatch({
+			type: SET_PASSWORD_FAIL,
+			payload: error.response && error.response.data.detail
+			? error.response.data.detail
+			: error.message,
+		})
+	}
+}
+
+
 export const updatePersonalInfo = (updatedInfo, id) => async(dispatch) => {
 	try{
 		dispatch({
@@ -121,7 +222,7 @@ export const updatePersonalInfo = (updatedInfo, id) => async(dispatch) => {
 		})
 
 		const body = {
-	    	'username': updatedInfo.username,
+	    	'email': updatedInfo.email,
 	    	'first_name': updatedInfo.first_name,
 	    	'last_name': updatedInfo.last_name,
 	    	'email': updatedInfo.email,

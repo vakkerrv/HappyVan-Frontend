@@ -28,7 +28,7 @@ export const fetchWishlist = () => async (dispatch, getState) => {
             payload: data
         })
 
-        localStorage.setItem('wishlist', JSON.stringify(getState().wishlist.wishlistItems))
+        // localStorage.setItem('wishlist', JSON.stringify(getState().wishlist.wishlistItems))
 
     } catch (error) {
         dispatch({
@@ -68,9 +68,9 @@ export const addToWishlist = (item_id) => async (dispatch, getState) => {
                 payload: data,
             })
 
-            dispatch(fetchWishlist())
-
         }
+    
+        // dispatch(fetchWishlist())
 
     }catch(error){
         dispatch({
@@ -97,7 +97,7 @@ export const removeFromWishlist = (id) => async (dispatch, getState) => {
         payload: id,
     })
 
-    localStorage.setItem('wishlist', JSON.stringify(getState().wishlist.wishlistItems))
+    // localStorage.setItem('wishlist', JSON.stringify(getState().wishlist.wishlistItems))
 }
 
 

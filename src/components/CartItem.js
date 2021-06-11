@@ -15,8 +15,8 @@ const CartItem = ({item, id}) => {
 
         <Row>
             <Col md={3}>
-                {item.image ? (
-                    <Image src={item.image[0].image} alt={'image'} fluid rounded />
+                {item.image && item.image.length>0 ? (
+                    <Image src={item.image[0].image} fluid rounded />
                     ) : (
                     <Image alt={'image'} fluid rounded />
                     )

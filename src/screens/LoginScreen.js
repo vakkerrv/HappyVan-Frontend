@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { Container, Form, Button, Row, Col } from 'react-bootstrap'
+import { LinkContainer } from 'react-router-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 // import Loader from '../components/Loader'
 // import Message from '../components/Message'
 // import FormContainer from '../components/FormContainer'
 import { login } from '../actions/userActions'
+
+import '../css/InputFieldStyle.css';
 
 function LoginScreen({ location, history }) {
     const [username, setUsername] = useState('')
@@ -14,7 +17,6 @@ function LoginScreen({ location, history }) {
     const dispatch = useDispatch()
 
     const redirect = location.search ? location.search.split('=')[1] : '/'
-    // const redirect = '/'
 
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
@@ -42,7 +44,7 @@ function LoginScreen({ location, history }) {
                         <Form.Group controlId='username' className='form-floating my-form-floating'>
                             <Form.Control
                                 type='text'
-                                placeholder='Enter Username'
+                                placeholder=' '
                                 // value={1}
                                 onChange={(e) => setUsername(e.target.value)}
                                 required
@@ -54,7 +56,7 @@ function LoginScreen({ location, history }) {
                         <Form.Group controlId='password' className='form-floating my-form-floating'>
                             <Form.Control
                                 type='password'
-                                placeholder='Enter Password'
+                                placeholder=' '
                                 // value={1}
                                 onChange={(e) => setPassword(e.target.value)}
                                 required
@@ -64,16 +66,20 @@ function LoginScreen({ location, history }) {
                         </Form.Group>
 
                         <Button type='submit' variant='primary' className='my-1'>
-                            Login
+                            Войти
                         </Button>
 
                     </Form>
 
                     <Link to={'/register'}>
                         <Button type='button' variant='secondary' className='my-1'>
-                            Register
+                            Регистрация
                         </Button>
                     </Link>
+
+                    <LinkContainer to={'/reset_password'}>
+                        <div>Забыли пароль? Восстановить</div>
+                    </LinkContainer>
 
                 </Col> 
             </Row>

@@ -25,8 +25,6 @@ const TabAddress = () => {
     ]
 
 	return(
-		<div className='settings-block pb-2'>
-
 	        <AccountSettingsView 
 	        	header = 'Адрес' 
 	        	button = {
@@ -68,7 +66,6 @@ const TabAddress = () => {
 
         	/>
 
-        </div>
 	)
 
 }

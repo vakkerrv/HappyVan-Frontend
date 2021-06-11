@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { createOrder } from '../actions/orderActions'
-// import { ORDER_CREATE_RESET } from '../constants/orderConstants'
+import { ORDER_CREATE_RESET } from '../constants/orderConstants'
 
 import CartItem from '../components/CartItem'
 
@@ -32,27 +32,30 @@ function PlaceOrderScreen({ history }) {
     const { order, error, success: orderCreateSuccess } = orderCreate
 
     const subscription = useSelector(state => state.subscription)
-    const { details } = subscription
+    const { details: subscriptionDetails } = subscription
 
     const dispatch = useDispatch()
 
     useEffect(() => {
-        if (cartItems.length === 0 && userInfo) {
+        // if (cartItems.length === 0 && userInfo) {
+        if (userInfo) {
             dispatch(fetchCartList()) 
         }
-        if (bagItems.length === 0  && userInfo){
+        // if (bagItems.length === 0  && userInfo){
+        if (userInfo){
             dispatch(fetchBagList())
         }
 
         if (orderCreateSuccess){
-            history.push('/order_payment')
+            history.push(`/order_payment/${order.id}`)
+            dispatch({ type: ORDER_CREATE_RESET })
         }
-    }, [userInfo, dispatch])
+    }, [userInfo, dispatch, orderCreateSuccess])
 
     const placeOrder = (e) => {
         e.preventDefault()
         dispatch(createOrder({
-            subscription_id: details.id,
+            subscription_id: subscriptionDetails.id,
             delivery_option: 'standard',
             delivery_date: 2,
             delivery_time_from: 5, 
@@ -150,7 +153,7 @@ function PlaceOrderScreen({ history }) {
                                             <ListGroup.Item key={index}>
                                                 <Row className='d-flex flex-row align-items-center'>
                                                     <Col md={2}>
-                                                        {item.item_id.image ? (
+                                                        {item.item_id && item.item_id.image && item.item_id.image.length>0 ? (
                                                             <Image src={item.item_id.image[0].image} alt={'image'} fluid rounded />
                                                             ) : (
                                                             <Image alt={'image'} fluid rounded />
