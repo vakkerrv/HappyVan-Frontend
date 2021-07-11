@@ -17,7 +17,7 @@ import {
     ORDER_PAY_FAIL,
 } from '../constants/orderConstants'
 
-import { fetchCartList } from './cartActions'
+// import { fetchCartList } from './cartActions'
 
 // export const fetchOrderList = () => async (dispatch) => {
 //     try {

@@ -1,0 +1,33 @@
+.swapie {
+    padding: 100px 0 150px;
+    background: url('../../images/bg/main-bg.jpg') center bottom no-repeat;
+    background-size: cover;
+}
+.swapie-content {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+.swapie-info {
+    margin-right: 20px;
+    h1 {
+        color: $sub-color;
+        font: bold 75px/90px $CenturyGothic;
+        margin-bottom: 7px;
+    }
+    b {
+        font-weight: 600;
+        font-size: 50px;
+        line-height: 65px;  
+        color: #314145;
+    }
+    p {
+        margin-top: 35px;
+        font-weight: 100;
+        font-size: 32px;
+        line-height: 40px;
+    }
+}
+.swapie-photo_mob {
+    display: none;
+}

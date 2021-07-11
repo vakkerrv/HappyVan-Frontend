@@ -1,0 +1,70 @@
+.what-subscription {
+    @extend %page-frame;
+}
+.page-title {
+    font-weight: 600;
+    font-size: 50px;
+    position: relative;
+    span {
+        position: relative;
+        z-index: 2;
+    }
+    &::before {
+        content: '';
+        width: 43px;
+        height: 14px;
+        background: rgba(38, 146, 154, 0.2);
+        border-radius: 150px;
+        position: absolute;
+        left: -11px;
+        bottom: 10px;
+    }
+}
+.what-subscription__list {
+    margin-top: 55px;
+    @include grid(3, 130px, 65px);
+    counter-reset: num;
+}
+.what-subscription__item {
+/*    &::before {
+        content: '';
+        width: 100%;
+        height: 4px;
+        display: block;
+        background-color: $sub-color;
+        border-radius: 150px;
+        margin-bottom: 32px;
+    }*/
+    div{
+        /*position: relative;*/
+        @include subtitle($min-height: 43px, $font-size: 22px, $font-weight: 700, $width: 100%)
+        /*font-weight: 500;
+        font-size: 36px;
+        background-color: $sub-color-light;
+        border-radius: 150px;
+        padding-left: 1.5rem;*/
+    }
+    h3 {
+        &::before {
+            content: counter(num);
+            counter-increment: num;
+            display: block;
+            font-weight: 500;
+            font-size: 85px;
+            line-height: 1;
+            color: $sub-color;
+            margin-bottom: 25px;
+            padding-left: 1.5rem;
+        }
+    }
+    p {
+        font-weight: 300;
+        margin-top: 20px;
+        line-height: 27px;
+        padding-left: 1.5rem;
+    }
+}
+.what-subscription__btn {
+    @include button(224px, 61px);
+    margin: 60px auto 0;
+}

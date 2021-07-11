@@ -125,10 +125,11 @@ export const addListToCart = (item_id_list) => async (dispatch, getState) => {
     try{
         dispatch({type: CART_ADD_LIST_ITEM_REQUEST})
 
-        let body = []
-        item_id_list.map(x => {
-                body.push({item_id: x}) 
-            })
+        // let body = []
+        // item_id_list.map(x => {
+        //         body.push({item_id: x}) 
+        //     })
+        let body = item_id_list.map(x => {return({item_id: x})})
 
         await api.post(
                 'cart/cart-item/add/',

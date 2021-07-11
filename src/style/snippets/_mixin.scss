@@ -1,0 +1,82 @@
+
+// @mixin button
+
+@mixin button($width: auto, $height: auto, $color: $button-color) {
+	max-width: 100%;
+	width: $width;
+	height: $height;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 150px;
+	background: $button-bg;
+	font: $button-font;
+	text-align: center;
+	color: $color;
+	box-sizing: border-box;
+	cursor: pointer;
+	position: relative;
+	transition: .4s;
+	input {
+		display: none;
+	}
+	&:hover {
+		box-shadow: 0px 10px 35px rgba(255, 113, 70, 0.45);
+	}
+}
+
+// @mixin placeholder
+
+@mixin placeholder($font, $color) {
+	&::placeholder {  font: $font; color: $color; } 
+}
+
+// @mixin grid
+
+@mixin grid($item: 3, $gap-columns: 20px, $gap-rows: 20px, $break: 0, $tabletBreak: 0, $mobBreak: 1) {
+	$gridColumn: calc( (100% / #{$item}) - #{$gap-columns});
+	
+	display: grid;
+    grid-template-columns: repeat(auto-fill, minmax($gridColumn, 1fr));
+    grid-gap: $gap-rows $gap-columns;
+    box-sizing: border-box;
+
+	@media screen and (max-width: 1200px) {
+		grid-template-columns: repeat(auto-fill, minmax(calc( (100% / (#{$item} - #{$break})) - #{$gap-columns}), 1fr));
+	}
+
+	@media screen and (max-width: 980px) {
+		grid-template-columns: repeat(auto-fill, minmax(calc( 100% / #{$tabletBreak} - #{$gap-columns}), 1fr));
+	}
+
+	@media screen and (max-width: 700px) {
+		grid-template-columns: repeat(auto-fill, minmax(calc( 100% / #{$mobBreak} - #{$gap-columns}), 1fr));
+	}
+	img {
+		max-width: 100%;
+		display: block;
+	}
+}
+
+
+// @mixin subtitle
+
+@mixin subtitle($padding: 1rem, $min-height: 30px, $font-size: 18px, $font-size_mob: 14px, $font-weight: 600, $font-weight_mob: 500, $width: fit-content) {
+	background-color: $sub-color-light;
+	min-height: $min-height;
+    width: $width;
+    border-radius: 150px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+
+    padding: 0 $padding;
+    font-size: $font-size;
+    font-weight: $font-weight;
+	display: flex;
+	align-items: center;
+
+	@media screen and (max-width: 700px){
+	    font-size: $font-size_mob;
+	    font-weight: $font-weight_mob;
+	}
+}

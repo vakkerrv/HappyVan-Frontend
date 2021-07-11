@@ -34,7 +34,33 @@ import {USER_LOGIN_REQUEST,
 		SET_PASSWORD_REQUEST,
 		SET_PASSWORD_SUCCESS,
 		SET_PASSWORD_FAIL,
+
+		USER_CHECK_INFO_REQUEST,
+		USER_CHECK_INFO_SUCCESS,
+		USER_CHECK_INFO_FAIL,
+
 	} from '../constants/userConstants'
+
+export const userCheckInfoReducer = (state={}, action) => {
+	switch(action.type){
+		case USER_CHECK_INFO_REQUEST:
+			return { loading: true }
+
+		case USER_CHECK_INFO_SUCCESS:
+			return { loading: false, userShortInfo: action.payload }
+
+		case USER_CHECK_INFO_FAIL:
+			return { loading: false, error: action.payload }
+
+        case USER_LOGOUT:
+            return {}
+
+		default:
+			return state
+	}
+    
+};
+
 
 export const userRegisterReducer = (state={}, action) => {
 	switch(action.type){

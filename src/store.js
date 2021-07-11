@@ -3,6 +3,7 @@ import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
 
 import {
+    userCheckInfoReducer, 
     userLoginReducer, 
     userUpdateReducer, 
     getAddressReducer, 
@@ -17,7 +18,7 @@ import {
 } from './reducers/productReducers'
 
 import {
-    cartReducer, cartAddItemReducer,
+    cartReducer, //cartAddItemReducer,
 } from './reducers/cartReducers'
 
 import {
@@ -51,6 +52,7 @@ import {
 import { USER_LOGOUT } from './constants/userConstants'
 
 const appReducer = combineReducers({
+    userCheckInfo: userCheckInfoReducer,
     userRegister: userRegisterReducer,
     userLogin: userLoginReducer,
     userUpdate: userUpdateReducer,
@@ -66,7 +68,7 @@ const appReducer = combineReducers({
     bagUpdate: bagUpdateReducer,
     
     cart: cartReducer,
-    addCart: cartAddItemReducer,
+    // addCart: cartAddItemReducer,
 
     wishlist: wishlistReducer,
     addWishlist: wishlistAddItemReducer,
@@ -95,6 +97,8 @@ const reducer = (state, action) => {
   return appReducer(state, action)
 }
 
+// const userShortInfoFromStorage = localStorage.getItem('userShortInfo') ?
+//     JSON.parse(localStorage.getItem('userShortInfo')) : null
 const userInfoFromStorage = localStorage.getItem('userInfo') ?
     JSON.parse(localStorage.getItem('userInfo')) : null
 const addressFromStorage = localStorage.getItem('address') ?
@@ -109,6 +113,7 @@ const cartFromStorage = localStorage.getItem('cartItems') ?
     JSON.parse(localStorage.getItem('cartItems')) : []
 
 const initialState = {
+    // userCheckInfo: { userShortInfo: userShortInfoFromStorage },
     userLogin: { userInfo: userInfoFromStorage },
     address: { addressInfo: addressFromStorage},
     subscription: { details: subInfoFromStorage },

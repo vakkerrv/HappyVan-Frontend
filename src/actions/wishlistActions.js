@@ -1,11 +1,11 @@
 import api from "../api";
-import { v4 as uuidv4 } from 'uuid';
+// import { v4 as uuidv4 } from 'uuid';
 
 import {
     WISHLIST_REQUEST,
     WISHLIST_SUCCESS,
     WISHLIST_FAIL,
-    WISHLIST_ADD_ITEM,
+    // WISHLIST_ADD_ITEM,
     WISHLIST_REMOVE_ITEM,
     // UNAUT_WISHLIST,
 
@@ -49,8 +49,8 @@ export const addToWishlist = (item_id) => async (dispatch, getState) => {
         const currentList = getState().wishlist.wishlistItems
         const existItem = currentList.find(x => x.item_id.id === item_id)
 
-        let data_dispatch = { item_id: {id: item_id} }
-        let id_generated
+        // let data_dispatch = { item_id: {id: item_id} }
+        // let id_generated
 
         if (!existItem) {
 

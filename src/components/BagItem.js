@@ -15,7 +15,7 @@ const BagItem = ({item, id, status}) => {
 
     useEffect(() => {
         dispatch(returnItem(id, returnStatus))
-    }, [returnStatus])
+    }, [returnStatus, dispatch, id])
 
 
     return (

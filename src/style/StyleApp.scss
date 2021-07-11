@@ -1,0 +1,77 @@
+@import './fonts';
+@import './normaliz';
+@import './global';
+
+@import './snippets/main-snippets';
+
+@import '../components/WelcomeEmail/WelcomeEmail';
+
+@import '../components/Header/StyleHeader';
+@import '../components/Footer/StyleFooter';
+@import '../components/MainApproach/StyleMainApproach';
+@import '../components/MainCategory/StyleMainCategory';
+@import '../components/MainNew/StyleMainNew';
+@import '../components/MainSwapie/StyleMainSwapie';
+@import '../components/MainWhat/StyleMainWhat';
+@import '../components/MainClose/StyleMainClose';
+@import '../components/Pagination/StylePagination';
+/*@import '../components/Breadcrumbs/StyleBreadcrumbs';*/
+@import '../components/RecommendationLine/StyleRecommendationLine';
+@import '../components/CatalogFilter/StyleCatalogFilter';
+@import '../components/FAQ/StyleFAQ';
+@import '../components/HowItWorks/StyleHowItWorks';
+@import '../components/SubscriptionPlans/StyleSubscriptionPlans';
+@import '../components/AboutTokens/StyleAboutTokens';
+@import '../components/AboutCleaning/StyleAboutCleaning';
+
+/*Catalog item*/
+@import '../components/CatalogItem/StyleCatalogItem';
+
+/*Catalog*/
+@import '../screens/CatalogScreen/StyleCatalogScreen';
+
+/*Product Screen*/
+@import '../screens/ProductScreen/StyleProductScreen';
+@import '../components/CatalogItemSwiper/StyleCatalogItemSwiper';
+
+/*Cart Screen*/
+@import '../screens/CartScreen/StyleCartScreen';
+@import '../screens/CartScreen/MediaCartScreen';;
+
+/*Registration Screen*/
+@import '../screens/RegisterScreens/StyleRegisterScreens';
+@import '../screens/RegisterScreens/MediaRegisterScreens';
+
+@import './media';
+
+
+/*Custom*/
+.token{
+	width: 30px;
+}
+.Toastify__toast-container--top-right {
+    top: 95px;
+}
+.Toastify__toast{
+    font-family: inherit;
+    background-color: $sub-color;
+    color: #fff;
+}
+.Toastify__close-button{
+    color: #fff;
+    opacity: 1;
+}
+@media screen and (max-width: 700px) {
+    .Toastify__toast-body{
+        font-size: 14px;
+    }
+}
+.btn-disabled{
+	background-color: #DFDFDF;
+	color: #595959;
+	box-shadow: None;
+	cursor: default;
+	&:hover{
+		box-shadow: None;
+	};
+}

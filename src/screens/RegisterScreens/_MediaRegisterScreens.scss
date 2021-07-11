@@ -1,0 +1,54 @@
+@media screen and (max-width: 1010px) {
+	.registration-valid {
+		margin-bottom: 20px;
+		p {
+			position: relative;
+			right: auto;
+			br {
+				display: none;
+			}
+			&::before {
+				left: 0;
+				right: 0;
+				top: -6px;
+			}
+		}
+	}
+}
+
+@media screen and (max-width: 700px) {
+	.registration-subtitle {
+		font-size: 16px;
+		line-height: 26px;
+	}
+	.registration-content {
+		width: 100%;
+		margin-top: 20px;
+	}
+	.page-input {
+		font-size: 14px;
+	}
+	.registration-check {
+		p {
+			margin-top: -2px;
+		}
+	}
+	.registration-sub {
+		width: 100%;
+	}
+
+	.registration-address_price{
+	    img{
+	        width: 84px;
+	        margin: 0 auto;
+	    }
+	    p{
+	    	font-size: 16px;
+	    }
+	    p:nth-child(3)  {
+	        color: $sub-color;
+	        font-size: 18px;
+	        font-weight: bold;
+	    }
+}
+}

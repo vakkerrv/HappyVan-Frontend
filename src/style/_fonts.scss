@@ -1,0 +1,156 @@
+
+@font-face {
+  font-family: 'CenturyGothic';
+  src: url('../fonts/CenturyGothic/CenturyGothic-Bold/CenturyGothic-Bold.woff2') format("woff2"), 
+       url('../fonts/CenturyGothic/CenturyGothic-Bold/CenturyGothic-Bold.woff') format("woff");
+  font-weight: bold;
+  font-display: auto;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Lato';
+  src: url('../fonts/Lato/Lato-Light/Lato-Light.woff2') format("woff2"), 
+       url('../fonts/Lato/Lato-Light/Lato-Light.woff') format("woff");
+  font-weight: 300;
+  font-display: auto;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Lato';
+  src: url('../fonts/Lato/Lato-Regular/Lato-Regular.woff2') format("woff2"), 
+       url('../fonts/Lato/Lato-Regular/Lato-Regular.woff') format("woff");
+  font-weight: 400;
+  font-display: auto;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Lato';
+  src: url('../fonts/Lato/Lato-Medium/Lato-Medium.woff2') format("woff2"), 
+       url('../fonts/Lato/Lato-Medium/Lato-Medium.woff') format("woff");
+  font-weight: 500;
+  font-display: auto;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Lato';
+  src: url('../fonts/Lato/Lato-SemiBold/Lato-SemiBold.woff2') format("woff2"), 
+       url('../fonts/Lato/Lato-SemiBold/Lato-SemiBold.woff') format("woff");
+  font-weight: 600;
+  font-display: auto;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Lato';
+  src: url('../fonts/Lato/Lato-Bold/Lato-Bold.woff2') format("woff2"), 
+       url('../fonts/Lato/Lato-Bold/Lato-Bold.woff') format("woff");
+  font-weight: bold;
+  font-display: auto;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Lato';
+  src: url('../fonts/Lato/Lato-Heavy/Lato-Heavy.woff2') format("woff2"), 
+       url('../fonts/Lato/Lato-Heavy/Lato-Heavy.woff') format("woff");
+  font-weight: 800;
+  font-display: auto;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Lato';
+  src: url('../fonts/Lato/Lato-Black/Lato-Black.woff2') format("woff2"), 
+       url('../fonts/Lato/Lato-Black/Lato-Black.woff') format("woff");
+  font-weight: 900;
+  font-display: auto;
+  font-style: normal;
+}
+
+$Lato: 'Lato', sans-serif;
+$CenturyGothic: 'CenturyGothic', sans-serif;
+
+$main-font: $Lato;
+$button-font: 16px $Lato;
+
+@font-face {
+  font-family: 'icon-font';
+  src:  url('../fonts/icon-font/icon-font.eot?zapzd9');
+  src:  url('../fonts/icon-font/icon-font.eot?zapzd9#iefix') format('embedded-opentype'),
+    url('../fonts/icon-font/icon-font.ttf?zapzd9') format('truetype'),
+    url('../fonts/icon-font/icon-font.woff?zapzd9') format('woff'),
+    url('../fonts/icon-font/icon-font.svg?zapzd9#icon-font') format('svg');
+  font-weight: normal;
+  font-display: auto;
+  font-style: normal;
+}
+[class^="fa-"], [class*=" fa-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icon-font' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.fa-plus:before {
+  content: "\e90e";
+}
+.fa-calendar:before {
+  content: "\e900";
+}
+.fa-arrow-next:before {
+  content: "\e901";
+}
+.fa-arrow-prev:before {
+  content: "\e902";
+}
+.fa-cart:before {
+  content: "\e904";
+}
+.fa-catalog:before {
+  content: "\e905";
+}
+.fa-like:before {
+  content: "\e906";
+}
+.fa-close:before {
+  content: "\e907";
+}
+.fa-user:before {
+  content: "\e908";
+}
+.fa-search:before {
+  content: "\e909";
+}
+.fa-share:before {
+  content: "\e90a";
+}
+.fa-check:before {
+  content: "\e90b";
+}
+.fa-filter:before {
+  content: "\e90c";
+}
+.fa-like-filled:before {
+  content: "\e90d";
+}
+.fa-garbage:before {
+  content: "\e903";
+}
+.fa-eye-hidden:before {
+  content: "\e90f";
+}
+.fa-eye:before {
+  content: "\e910";
+}

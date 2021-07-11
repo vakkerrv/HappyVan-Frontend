@@ -1,11 +1,11 @@
 import api from "../api";
-import { v4 as uuidv4 } from 'uuid';
+// import { v4 as uuidv4 } from 'uuid';
 
 import {
-    WAITLIST_REQUEST,
-    WAITLIST_SUCCESS,
-    WAITLIST_FAIL,
-    WAITLIST_ADD_ITEM,
+    // WAITLIST_REQUEST,
+    // WAITLIST_SUCCESS,
+    // WAITLIST_FAIL,
+    // WAITLIST_ADD_ITEM,
     WAITLIST_REMOVE_ITEM,
 
     WAITLIST_ADD_ITEM_REQUEST,
@@ -48,8 +48,8 @@ export const addToWaitlist = (item_id) => async (dispatch, getState) => {
         const currentList = getState().waitlist.waitlistItems
         const existItem = currentList.find(x => x.item_id.id === item_id)
 
-        let data_dispatch = { item_id: {id: item_id} }
-        let id_generated
+        // let data_dispatch = { item_id: {id: item_id} }
+        // let id_generated
 
         if (!existItem) {
 

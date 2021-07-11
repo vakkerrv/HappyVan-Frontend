@@ -1,0 +1,27 @@
+@media screen and (max-width: 700px) {
+	.catalog-filter__show {
+		/*flex-direction: row-reverse;*/
+		/*justify-content: flex-start;*/
+		/*cursor: pointer;*/
+		.catalog-filter__show-icon {
+			transform: rotate(180deg);
+			margin-right: 15px;
+		}
+		.catalog-filter__item-title {
+			justify-content: flex-start;
+		}
+	}
+
+	.catalog-filter__selection-list{
+		margin-top: 10px;
+	}
+
+	.catalog-filter__selection-title{
+	    display: flex;
+	    align-items: center;
+	    justify-content: space-between;
+	    i{
+	    	display: inherit;
+	    }
+    }
+}

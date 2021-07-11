@@ -1,0 +1,118 @@
+%page-frame {
+	padding: 100px 0;
+}
+// Главные цвета сайта
+
+$main-color: #FF774E;
+$sub-color: #26929A;
+$sub-color-light: #DCF4F5;
+
+// Цвет текста
+
+$text-color: #424242;
+
+// Цвет кнопок
+
+$button-color: #fff;
+$button-bg: #FF774E;
+
+// Размер контентной части
+
+$frame: 1140px;
+
+
+* {
+	&::selection {
+		color: #fff; /* Цвет текста */
+    	background: $sub-color; /* Цвет фона */
+	}
+}
+html {
+	overflow-x: hidden;
+}
+body {
+	min-width: 320px;
+	color: $text-color;
+	font: normal 18px/1.5 $main-font;
+}
+main {
+	margin-top: 93px;
+}
+h1,h2,h3,h4,h5,h6, p {
+	margin: 0;
+	font-size: inherit;
+	line-height: inherit;
+	font-weight: inherit;
+}
+ul, ol { 
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+a {
+	text-decoration: none;
+	outline: none;
+	color: $text-color;
+	cursor: pointer;
+	&::selection {
+		color: inherit; /* Цвет текста */
+    	background: transparent; /* Цвет фона */
+	}
+}
+form {
+	box-sizing: border-box;
+}
+input {
+	outline: none;
+	box-sizing: border-box;
+}
+input[type="submit"] {
+	cursor: pointer;
+}
+textarea {
+	box-sizing: border-box;
+	outline: none;
+}
+select, option {
+	outline: none;
+	cursor: pointer;
+	appearance: none;
+}
+select::-ms-expand { 
+    display: none;
+}
+img {
+	&::selection {
+		color: inherit; /* Цвет текста */
+    	background: transparent; /* Цвет фона */
+	}
+}
+label {
+	cursor: pointer;
+	margin-bottom: 0;
+}
+.section-frame { 
+	max-width: $frame;
+	width: 100%;
+	margin: 0 auto;
+	box-sizing: border-box;
+ }
+ .load * { 
+  transition: none !important;
+}
+.open-frame	{
+	overflow: hidden;
+}
+.page-section {
+	padding-top: 40px;
+	padding-bottom: 95px;
+}
+.page-section_grey {
+	padding-top: 40px;
+	padding-bottom: 95px;
+	background-color: #FAFAFA;
+}
+.page-title_center {
+    width: fit-content;
+    margin: 0 auto;
+}

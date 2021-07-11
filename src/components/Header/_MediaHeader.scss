@@ -1,0 +1,265 @@
+@media screen and (max-width: 1200px) {
+	.header-user_active {
+		margin-left: 10px;
+		span {
+			&::before {
+				display: none;
+			}
+		}
+	}
+}
+
+@media screen and (max-width: 1010px) {
+	.catalog-btn {
+		margin-right: 0;
+	}
+}
+
+@media screen and (max-width: 980px) {
+	.main-menu {
+		margin-left: 20px;
+	}
+}
+
+@media screen and (max-width: 700px) {
+	.main-menu {
+		display: none;
+	}
+	.header-like {
+		display: none !important;
+	}
+/*	.header-user {
+		display: none !important;
+	}*/
+	.header-cart {
+		width: 28px;
+		height: 28px;
+		margin: 0 auto;
+		i {
+			font-size: 13px;
+		}
+	}
+	.header-cart span {
+		top: -8px;
+    	right: -6px;
+	}
+	.header-cart-icon {
+		/*margin-right: 27px;
+		width: fit-content !important;
+		display: block !important;
+		margin-left: 20px;
+		margin-top: -12px !important;*/
+
+		p {
+			display: block;
+			font-weight: 300;
+			font-size: 12px;
+			/*line-height: 12px;*/
+		}
+		/*span {
+			width: 50px;
+			display: block;
+			padding: 2px 5px;
+			position: absolute;
+			background: rgba(38, 146, 154, 0.2);
+			text-align: center;
+			font-size: 9px;
+			border-radius: 150px;
+			top: 36px;
+    		left: -10px;
+			right: 0;
+			box-sizing: border-box;
+		}*/
+	}
+	.cart-icon_not-active{
+
+	}
+	.header-menu_mob {
+		display: block;
+		margin-left: 40px;
+		position: relative;
+		/*margin-top: 5px;*/
+/*		&::before {
+			content: '';
+			width: 1px;
+			height: 46px;
+			display: block;
+			box-sizing: border-box;
+			border-left: 1px dashed #E8E8E8;
+			position: absolute;
+			left: -20px; 
+			top: -5px;
+		}*/
+		p {
+			font-weight: 300;
+			font-size: 12px;
+			/*margin-top: 5px;*/
+		}
+	}
+
+/*	.cart-balance {
+		img {
+			display: none;
+		}
+	}*/
+	.cart-icon_balance {
+		/*margin-right: 27px;*/
+		margin-top: -16px;
+
+		border: none;
+		padding: 0;
+		position: relative;
+		p {
+			position: absolute;
+			left: 0;
+			right: 0;
+			margin: 0 auto;
+			bottom: -19px;
+			text-align: center;
+		}
+	}
+	.logo_pc {
+		display: none;
+	}
+	.burger_user {
+		margin-left: 0;
+		span {
+			background-color: $sub-color;
+		}
+	}
+	.catalog-btn {
+		width: auto;
+		height: auto;
+		background: none;
+		flex-direction: column;
+		font-weight: 300;
+		font-size: 14px;
+		margin-top: 2px;
+		i {
+			font-size: 28px;
+			margin-right: 0;
+		}
+	}
+	.catalog-btn_mob {
+		display: flex;
+		font-size: 12px;
+	}
+	.header-user_active {
+		width: fit-content !important;
+		display: block !important;
+		margin-left: 0px;
+		/*margin-top: -12px !important;*/
+		p {
+			display: block;
+			font-weight: 300;
+			font-size: 12px;
+			/*line-height: 12px;*/
+		}
+		span {
+			width: 28px;
+			height: 28px;
+			font-size: 12px;
+			margin: 0 auto;
+			&::before {
+				display: none;
+			}
+		}
+	}
+	.header-menu {
+		display: none;
+	}
+	.header-btn_user {
+		align-items: flex-start;
+	}
+	.logo_mob {
+		display: block;
+		/*margin-right: 20px;*/
+		img {
+			width: 80px;
+		}
+	}
+	.mob-nav_user {
+		top: 113px;
+		a {
+			padding: 20px 0;
+			margin: 0 20px;
+			border-bottom: 1px solid #EEEEEE;
+		}
+		img {
+			width: 26px;
+		}
+	}
+	.user-list {
+		width: 100vw;
+		left: -20px;
+		right: auto;
+		border: none;
+		box-shadow: 0px 9px 15px rgba(#000, 0.1);
+		border-top: 1px solid #EEEEEE;
+	}
+/*	.cart-icon_balance {
+		border: none;
+		padding: 0;
+		position: relative;
+	}*/
+	
+	.cart-balance {
+		span {
+			width: 50px;
+			display: block;
+			padding: 2px 5px;
+			position: absolute;
+			background: rgba(38, 146, 154, 0.2);
+			text-align: center;
+			font-size: 9px;
+			border-radius: 150px;
+			top: 30px;
+    		left: -10px;
+			right: 0;
+			margin: 0 auto;
+			box-sizing: border-box;
+		}
+/*		img {
+			display: none;
+		}*/
+	}
+	/*.cart-balance_not-active{
+		span {
+			width: 50px;
+			display: block;
+			padding: 2px 5px;
+			position: absolute;
+			text-align: center;
+			font-size: 12px;
+			font-weight: 300;
+			top: 36px;
+    		left: -10px;
+			right: 0;
+			margin: 0 auto;
+			box-sizing: border-box;
+		}
+	}*/
+	.cart-name {
+		span {
+			width: 50px;
+			display: block;
+			padding: 2px 5px;
+			position: absolute;
+			background: rgba(38, 146, 154, 0.2);
+			text-align: center;
+			font-size: 12px;
+			border-radius: 150px;
+			top: 36px;
+    		left: -10px;
+			right: 0;
+			margin: 0 auto;
+			box-sizing: border-box;
+		}
+	}
+/*	.header-btn_user {
+		margin-top: -15px;
+	}*/
+/*	.header-menu_mob p {
+		font-size: 12px;
+	}*/
+}

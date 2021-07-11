@@ -1,39 +1,44 @@
 import api from "../api";
-import {USER_LOGIN_REQUEST, 
-		USER_LOGIN_SUCCESS,
-		USER_LOGIN_FAIL,
-		USER_LOGOUT,
+import {
+	USER_LOGIN_REQUEST, 
+	USER_LOGIN_SUCCESS,
+	USER_LOGIN_FAIL,
+	USER_LOGOUT,
 
-		USER_REGISTER_REQUEST, 
-		USER_REGISTER_SUCCESS,
-		USER_REGISTER_FAIL,
+	USER_REGISTER_REQUEST, 
+	USER_REGISTER_SUCCESS,
+	USER_REGISTER_FAIL,
 
-		USER_UPDATE_REQUEST,
-		USER_UPDATE_SUCCESS,
-		USER_UPDATE_FAIL,
+	USER_UPDATE_REQUEST,
+	USER_UPDATE_SUCCESS,
+	USER_UPDATE_FAIL,
 
-		USER_ADD_ADDRESS_REQUEST,
-		USER_ADD_ADDRESS_SUCCESS,
-		USER_ADD_ADDRESS_FAIL,
+	USER_ADD_ADDRESS_REQUEST,
+	USER_ADD_ADDRESS_SUCCESS,
+	USER_ADD_ADDRESS_FAIL,
 
-		USER_GET_ADDRESS_REQUEST,
-		USER_GET_ADDRESS_SUCCESS,
-		USER_GET_ADDRESS_FAIL,
-		
-		USER_UPDATE_ADDRESS_REQUEST,
-		USER_UPDATE_ADDRESS_SUCCESS,
-		USER_UPDATE_ADDRESS_FAIL,
+	USER_GET_ADDRESS_REQUEST,
+	USER_GET_ADDRESS_SUCCESS,
+	USER_GET_ADDRESS_FAIL,
+	
+	USER_UPDATE_ADDRESS_REQUEST,
+	USER_UPDATE_ADDRESS_SUCCESS,
+	USER_UPDATE_ADDRESS_FAIL,
 
-		PASSWORD_RESET_REQUEST,
-		PASSWORD_RESET_SUCCESS,
-		PASSWORD_RESET_FAIL,
-		PASSWORD_RESET_CONFIRM_REQUEST,
-		PASSWORD_RESET_CONFIRM_SUCCESS,
-		PASSWORD_RESET_CONFIRM_FAIL,
+	PASSWORD_RESET_REQUEST,
+	PASSWORD_RESET_SUCCESS,
+	PASSWORD_RESET_FAIL,
+	PASSWORD_RESET_CONFIRM_REQUEST,
+	PASSWORD_RESET_CONFIRM_SUCCESS,
+	PASSWORD_RESET_CONFIRM_FAIL,
 
-		SET_PASSWORD_REQUEST,
-		SET_PASSWORD_SUCCESS,
-		SET_PASSWORD_FAIL,
+	SET_PASSWORD_REQUEST,
+	SET_PASSWORD_SUCCESS,
+	SET_PASSWORD_FAIL,
+
+	USER_CHECK_INFO_REQUEST,
+	USER_CHECK_INFO_SUCCESS,
+	USER_CHECK_INFO_FAIL,
 
 	} from '../constants/userConstants';
 
@@ -116,8 +121,8 @@ export const register = (output) => async(dispatch, getState) => {
 	}catch(error) {
 		dispatch({
 			type: USER_REGISTER_FAIL,
-			payload: error.response && error.response.data.detail
-			? error.response.data.detail
+			payload: error.response && error.response.data
+			? error.response.data
 			: error.message,
 		})
 	}
@@ -221,19 +226,19 @@ export const updatePersonalInfo = (updatedInfo, id) => async(dispatch) => {
 			type: USER_UPDATE_REQUEST,
 		})
 
-		const body = {
-	    	'email': updatedInfo.email,
-	    	'first_name': updatedInfo.first_name,
-	    	'last_name': updatedInfo.last_name,
-	    	'email': updatedInfo.email,
-	    	'user_ext': {
-	        	'phone': updatedInfo.phone,       		
-	    	}
-		}
+		// const body = {
+	 //    	'email': updatedInfo.email,
+	 //    	'first_name': updatedInfo.first_name,
+	 //    	'last_name': updatedInfo.last_name,
+	 //    	'email': updatedInfo.email,
+	 //    	'user_ext': {
+	 //        	'phone': updatedInfo.phone,       		
+	 //    	}
+		// }
 
 		const { data } = await api.put(
 			`accounts/profile/update/${id}/`, 
-			body,
+			updatedInfo,
 			)
 
 		dispatch({
@@ -341,6 +346,36 @@ export const updateAddress = (address, address_id) => async(dispatch) => {
 	}catch(error) {
 		dispatch({
 			type: USER_UPDATE_ADDRESS_FAIL,
+			payload: error.response && error.response.data.detail
+			? error.response.data.detail
+			: error.message,
+		})
+	}
+}
+
+export const checkInfo = (email) => async(dispatch) => {
+	try{
+		dispatch({
+			type: USER_CHECK_INFO_REQUEST,
+		})
+
+		const { data } = await api.post(
+			`accounts/profile_short/`, 
+			{"email": email},
+			)
+
+		dispatch({
+			type: USER_CHECK_INFO_SUCCESS,
+			payload: data,
+		})
+
+		return data;
+
+		// localStorage.setItem('userShortInfo', JSON.stringify(data))
+
+	}catch(error) {
+		dispatch({
+			type: USER_CHECK_INFO_FAIL,
 			payload: error.response && error.response.data.detail
 			? error.response.data.detail
 			: error.message,

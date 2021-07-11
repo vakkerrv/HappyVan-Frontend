@@ -1,0 +1,37 @@
+.approach {
+    padding: 85px 0 105px;
+    background: #FAFAFA;
+}
+.approach-list {
+    @include grid(2, 30px, 60px, 1, 1, 1);
+    margin-top: 55px;
+}
+.approach-item {
+    display: flex;
+    align-items: flex-start;
+    img {
+        display: block;
+        margin-right: 20px;
+    }
+    p {
+        margin-top: 10px;
+        font-weight: 300;
+        line-height: 28px;
+    }
+}
+.approach-item__content {
+    h3 {
+        font-weight: 600;
+        font-size: 28px;
+        line-height: 34px;
+    }
+    
+}
+.approach-info {
+    margin-top: 55px;
+    h3 {
+        text-align: center;
+        font-size: 32px;
+        line-height: 48px;
+    }
+}

@@ -1,0 +1,111 @@
+/*@import "../../style/fonts.scss";
+@import "../../style/normaliz.scss";
+@import "../../style/global.scss";
+@import "../../style/snippets/main-snippets.scss";
+@import "../../style/media.scss";
+*/
+.footer {
+    padding: 20px 0 10px;
+    border-top: 1px solid $sub-color;
+    background: #FAFAFA;
+}
+.footer__content {
+    display: flex;
+    align-items: flex-start;
+}
+.footer__logo {
+    width: 128px;
+}
+.footer__nav {
+    margin-top: 15px;
+    display: flex;
+    align-items: flex-start;
+    margin-left: 125px;
+    ul {
+        margin-right: 120px;
+        font-size: 12px;
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+    li {
+        margin-bottom: 15px;
+        &:last-child {
+            margin-bottom: 0; 
+        }
+    } 
+    a {
+        color: #363636;
+        @include line();
+    }
+    
+}
+.footer__pay {
+    border-top: 1px dashed #EFEFEF;
+    margin-top: 10px;
+    padding-top: 12px;
+    @include grid(3, 5px, 6px);
+}
+.footer__pay-item {
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #FFFFFF;
+    border-radius: 2px;
+}
+.footer-copy {
+    margin-top: 25px;
+    border-top: 1px solid #E9E9E9;
+    padding-top: 8px;
+}
+.footer-copy__content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 12px;
+    color: #5B5B5B;
+    a {
+        color: #5B5B5B;
+        transition: .4s;
+        &:hover {
+            color: $sub-color;
+        }
+    }
+}
+.footer__pay-mob {
+    display: none;
+}
+.footer__nav_mob {
+    display: none;
+}
+
+.footer__social {
+    display: flex;
+    a {
+        margin-right: 11px;
+        border-radius: 50%;
+        img {
+            display: block;
+        }
+        &:last-child {
+            margin-right: 0;
+        }
+        &:nth-child(1) {
+            box-shadow: 0px 4px 25px rgba(0, 136, 204, 0.25);
+        }
+        &:nth-child(2) {
+            box-shadow: 0px 4px 25px rgba(28, 64, 138, 0.2);
+        }
+        &:nth-child(3) {
+            box-shadow: 0px 4px 25px rgba(91, 0, 61, 0.3);
+        }
+        transition: .3s;
+        &:hover {
+            transform: translateY(-3px);
+        }
+    }
+}
+.footer__social_mob {
+    display: none;
+}

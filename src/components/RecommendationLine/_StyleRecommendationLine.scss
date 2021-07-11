@@ -1,0 +1,52 @@
+.slider-wrap {
+    margin-top: 50px;
+    position: relative;
+}
+.slider {
+    width: calc(100% + 30px);
+    margin-left: -15px;
+}
+.slider-arrow {
+    position: absolute;
+    width: 100%;
+    top: calc(50% - 30px);
+    a {
+        width: 60px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #fff;
+        color: #FFA34E;
+        font-size: 12px;
+        box-shadow: 0px 10px 35px rgba(252, 186, 125, 0.35);
+        border-radius: 50%;
+        transition: .4s;
+        position: absolute;
+        &:hover {
+            background-color: $main-color;
+            color: #fff;
+            box-shadow: 0px 10px 20px rgba(242, 82, 34, 0.2);
+        }
+    };
+    /*My adjustments*/
+    z-index: 1;
+}
+.slider-prev {
+    left: -60px;
+}
+.slider-next {
+    right: -60px;
+}
+.new-slide_bgWrap{/*My adjustments*/
+	box-sizing: border-box;
+    padding: 0px 15px 0px;
+}
+
+/*My adjustment*/
+/*.slider-wrap .new-wrap > .slick-track {
+    padding: 30px 0;
+}*/
+.slick-list {
+    height: inherit!important;
+}

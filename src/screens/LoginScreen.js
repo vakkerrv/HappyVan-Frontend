@@ -33,7 +33,7 @@ function LoginScreen({ location, history }) {
     }
 
     return (
-        <Container>
+        <main>
             <h1>Login</h1>
 
             <Row>
@@ -84,7 +84,7 @@ function LoginScreen({ location, history }) {
                 </Col> 
             </Row>
 
-        </Container>
+        </main>
     )
 }
 

@@ -15,11 +15,10 @@ const TabPersonalInfo = () => {
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
 
-    const [username, setUsername] = useState(userInfo.username)
     const [firstName, setFirstName] = useState(userInfo.first_name)
     const [lastName, setLastName] = useState(userInfo.last_name)
     const [email, setEmail] = useState(userInfo.email)
-    const [phone, setPhone] = useState(userInfo.user_ext ? userInfo.user_ext.phone : null)
+    const [phone, setPhone] = useState(userInfo.phone)
 
     const personalInfo = [
     	{key: 'Имя', value: firstName, type: 'text', onChange: (e) => setFirstName(e.target.value), required: true},
@@ -34,7 +33,6 @@ const TabPersonalInfo = () => {
     const updatePersonalInfoHandler = (e) => {
         e.preventDefault()
         const updated_data = {
-        	'username': username,
         	'first_name': firstName,
         	'last_name': lastName,
         	'email': email,

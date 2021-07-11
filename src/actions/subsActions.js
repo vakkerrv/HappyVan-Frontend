@@ -15,15 +15,16 @@ import {
 
 } from '../constants/subsConstants'
 
-export const subscribe = (type) => async (dispatch, getState) => {
+export const subscribe = (plan_id, payment_id) => async (dispatch, getState) => {
     try{
         dispatch({type: SUBSCRIBE_REQUEST})
 
         const body = {
-        sub_plan_id: type,
+            allowance_option_id: plan_id,
+            payment_option_id: payment_id,
         }
 
-        const { data } = await api.post(
+        await api.post(
             'sub/subscribe/',
             body,
             )
@@ -88,7 +89,7 @@ export const updateSubscription = (sub_id, plan_id) => async (dispatch) => {
             sub_plan_id: plan_id,
         }
 
-        const { data } = await api.put(`sub/update/${sub_id}/`, 
+        const { data } = await api.put(`sub/upgrade/${sub_id}/`, 
             body,
             )
 
