@@ -3,7 +3,7 @@ import axios from "axios";
 import store from './store'
 import { logout } from './actions/userActions'
 
-const baseUrl = "http://localhost:3000/api/1";
+const baseUrl = "http://178.154.241.63:8000/api/1";
 
 
 
